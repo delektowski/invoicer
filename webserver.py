@@ -1,0 +1,123 @@
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel
+from typing import Annotated
+from db.invoices_db import get_invoice
+from pdf_creator import PdfCreator
+
+
+app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
+
+invoice_file_path = "invoice_template_modyfied.docx"
+
+@app.get("/")
+async def send_invoice_webpage(request: Request):
+    latest_invoice = get_invoice()
+    print('kukui',latest_invoice)
+    return templates.TemplateResponse(request=request, name="invoice_form.html", context={"invoice_number": latest_invoice["invoice_number"]})
+
+@app.get("/invoice")
+async def send_invoice_webpage(request: Request):
+    invoice_number = request.query_params.get("invoice_number")
+    invoice_date = request.query_params.get("invoice_date")
+    invoice_pay_date = request.query_params.get("invoice_pay_date")
+    invoice_pay_type = request.query_params.get("invoice_pay_type")
+    invoice_account_number = request.query_params.get("invoice_account_number")
+    invoice_seller_name = request.query_params.get("invoice_seller_name")
+    invoice_seller_address = request.query_params.get("invoice_seller_address")
+    invoice_seller_nip = request.query_params.get("invoice_seller_nip")
+    invoice_buyer_name = request.query_params.get("invoice_buyer_name")
+    invoice_buyer_address = request.query_params.get("invoice_buyer_address")
+    invoice_buyer_nip = request.query_params.get("invoice_buyer_nip")
+    invoice_specyfication = request.query_params.get("invoice_specyfication")
+    invoice_classification = request.query_params.get("invoice_classification")
+    invoice_unit_measure = request.query_params.get("invoice_unit_measure")
+    invoice_hour_rates = request.query_params.get("invoice_hour_rates")
+    invoice_hours_number = request.query_params.get("invoice_hours_number")
+
+    return templates.TemplateResponse(
+        request=request,
+        name="invoice_page.html",
+        context={
+            "invoice_number": invoice_number,
+            "invoice_date": invoice_date,
+            "invoice_pay_date": invoice_pay_date,
+            "invoice_pay_type": invoice_pay_type,
+            "invoice_account_number": invoice_account_number,
+            "invoice_seller_name": invoice_seller_name,
+            "invoice_seller_address": invoice_seller_address,
+            "invoice_seller_nip": invoice_seller_nip,
+            "invoice_buyer_name": invoice_buyer_name,
+            "invoice_buyer_address": invoice_buyer_address,
+            "invoice_buyer_nip": invoice_buyer_nip,
+            "invoice_specyfication": invoice_specyfication,
+            "invoice_classification": invoice_classification,
+            "invoice_unit_measure": invoice_unit_measure,
+            "invoice_hour_rates": invoice_hour_rates,
+            "invoice_hours_number": invoice_hours_number,
+        },
+    )
+
+@app.get("/file")
+def send_file():
+    custom_filename = "invoice.docx"
+    return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
+
+@app.get("/pdf",status_code=201)
+def send_pdf(request: Request):
+    print('request: ', request.query_params)
+    # pdf_creator = PdfCreator()
+    # return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
+
+@app.post("/form", status_code=201)
+def get_form(
+    invoice_number: Annotated[str, Form()],
+    invoice_date: Annotated[str, Form()],
+    invoice_pay_date: Annotated[str, Form()],
+    invoice_pay_type: Annotated[str, Form()],
+    invoice_account_number: Annotated[str, Form()],
+    invoice_seller_name: Annotated[str, Form()],
+    invoice_seller_address: Annotated[str, Form()],
+    invoice_seller_nip: Annotated[str, Form()],
+    invoice_buyer_name: Annotated[str, Form()],
+    invoice_buyer_address: Annotated[str, Form()],
+    invoice_buyer_nip: Annotated[str, Form()],
+    invoice_specyfication: Annotated[str, Form()],
+    invoice_classification: Annotated[str, Form()],
+    invoice_unit_measure: Annotated[str, Form()],
+    invoice_hour_rates: Annotated[str, Form()],
+    invoice_hours_number: Annotated[str, Form()],
+):
+    redirect_url = "/invoice?" + "&".join(
+        f"{key}={value}"
+        for key, value in {
+            "invoice_number": invoice_number,
+            "invoice_date": invoice_date,
+            "invoice_pay_date": invoice_pay_date,
+            "invoice_pay_type": invoice_pay_type,
+            "invoice_account_number": invoice_account_number,
+            "invoice_seller_name": invoice_seller_name,
+            "invoice_seller_address": invoice_seller_address,
+            "invoice_seller_nip": invoice_seller_nip,
+            "invoice_buyer_name": invoice_buyer_name,
+            "invoice_buyer_address": invoice_buyer_address,
+            "invoice_buyer_nip": invoice_buyer_nip,
+            "invoice_specyfication": invoice_specyfication,
+            "invoice_classification": invoice_classification,
+            "invoice_unit_measure": invoice_unit_measure,
+            "invoice_unit_measure": invoice_unit_measure,
+            "invoice_unit_measure": invoice_unit_measure,
+            "invoice_hour_rates": invoice_hour_rates,
+            "invoice_hours_number": invoice_hours_number,
+        }.items()
+    )
+    response = RedirectResponse(url=redirect_url, status_code=301)
+
+    return response

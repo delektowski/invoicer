@@ -1,0 +1,109 @@
+import sqlite3
+
+from db.helper import db_response_to_dict
+
+conn = sqlite3.connect("invoices.db")
+
+cur = conn.cursor()
+
+mock_data = (
+    "krowa",
+    "2024-01-17",
+    "2024-02-01",
+    "Credit Card",
+    "123456789",
+    "Seller Co.",
+    "123 Main St, City",
+    "1234567890",
+    "Buyer Inc.",
+    "456 Oak St, Town",
+    "9876543210",
+    "Product ABC",
+    "Class A",
+    "Unit",
+    50.0,
+    10,
+)
+
+def create_table(table_name):
+    create_table_query = """
+    CREATE TABLE IF NOT EXISTS {} (
+        id INTEGER PRIMARY KEY,
+        invoice_number TEXT NOT NULL,
+        invoice_date DATE,
+        invoice_pay_date DATE,
+        invoice_pay_type TEXT,
+        invoice_account_number TEXT,
+        invoice_seller_name TEXT,
+        invoice_seller_address TEXT,
+        invoice_seller_nip TEXT,
+        invoice_buyer_name TEXT,
+        invoice_buyer_address TEXT,
+        invoice_buyer_nip TEXT,
+        invoice_specification TEXT,
+        invoice_classification TEXT,
+        invoice_unit_measure TEXT,
+        invoice_hour_rates INTEGER,
+        invoice_hours_number INTEGER
+    );
+    """.format(
+        table_name
+    )
+
+    cur.execute(create_table_query)
+    conn.commit()
+
+
+def insert_invoice(table_name, data):
+    insert_data_query = """
+    INSERT INTO {} (
+        invoice_number, invoice_date, invoice_pay_date, invoice_pay_type, invoice_account_number,
+        invoice_seller_name, invoice_seller_address, invoice_seller_nip,
+        invoice_buyer_name, invoice_buyer_address, invoice_buyer_nip,
+        invoice_specification, invoice_classification, invoice_unit_measure,
+        invoice_hour_rates, invoice_hours_number
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+    """.format(
+        table_name
+    )
+
+    cur.execute(
+        insert_data_query,
+        data,
+    )
+    conn.commit()
+
+
+def is_table_exist(table_name):
+    check_table_exist_query = """
+    SELECT name FROM sqlite_master WHERE type='table' AND name=?;
+    """
+    cur.execute(check_table_exist_query, (table_name,))
+    result = cur.fetchone()
+
+    return result is not None
+
+
+def get_invoice():
+    if is_table_exist("invoices"):
+        query = """
+        SELECT * FROM invoices ORDER BY id DESC LIMIT 1
+        """
+        get_latest_invoice = cur.execute(query)
+        latest_invoice_values = get_latest_invoice.fetchone()
+        latest_invoice_dict = db_response_to_dict(cur, latest_invoice_values)
+        print(latest_invoice_dict)
+        # conn.close()
+        return latest_invoice_dict
+
+
+# if not is_table_exist("invoices"):
+#     create_table("invoices")
+#     insert_invoice(table_name="invoices", data=mock_data)
+#     get_invoice()
+# else:
+#     insert_invoice(table_name="invoices", data=mock_data)
+#     get_invoice()
+
+
+

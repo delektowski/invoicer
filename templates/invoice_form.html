@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoicer</title>
+</head>
+
+<body>
+    <h1>invoice</h1>
+    <form action="/form/" method="post">
+        <label for="invoice-number">Invoice number</label>
+        <input type="text" id="invoice-number" name="invoice_number" placeholder="invoice number" value="{{invoice_number}}"><br>
+
+        <label for="invoice-date">Invoice date</label>
+        <input type="date" id="invoice-date" name="invoice_date" placeholder="invoice date"><br>
+
+        <label for="invoice-pay-date">Invoice pay date</label>
+        <input type="date" id="invoice-pay-date" name="invoice_pay_date" placeholder="invoice pay date"><br>
+
+        <label for="invoice-pay-type">Invoice pay type</label>
+        <input type="text" id="invoice-pay-type" name="invoice_pay_type" placeholder="invoice pay type"><br>
+
+        <label for="invoice-account-number">Invoice account number</label>
+        <input type="text" id="invoice-account-number" name="invoice_account_number"
+            placeholder="Invoice account number"><br>
+
+        <label for="invoice-seller-name">Invoice seller name</label>
+        <input type="text" id="invoice-seller-name" name="invoice_seller_name" placeholder="Invoice seller name"><br>
+
+        <label for="invoice-seller-address">Invoice seller address</label>
+        <input type="text" id="invoice-seller-address" name="invoice_seller_address"
+            placeholder="Invoice seller address"><br>
+
+        <label for="invoice-seller-nip">Invoice seller nip</label>
+        <input type="text" id="invoice-seller-nip" name="invoice_seller_nip" placeholder="Invoice seller nip"><br>
+
+        <label for="invoice-buyer-name">Invoice buyer name</label>
+        <input type="text" id="invoice-buyer-name" name="invoice_buyer_name" placeholder="Invoice buyer name"><br>
+
+        <label for="invoice-buyer-address">Invoice buyer address</label>
+        <input type="text" id="invoice-buyer-address" name="invoice_buyer_address"
+            placeholder="Invoice buyer address"><br>
+
+        <label for="invoice-buyer-nip">Invoice buyer nip</label>
+        <input type="text" id="invoice-buyer-nip" name="invoice_buyer_nip" placeholder="Invoice buyer nip"><br>
+
+        <label for="invoice-specyfication">Invoice specyfication</label>
+        <input type="text" id="invoice-specyfication" name="invoice_specyfication"
+            placeholder="Invoice specyfication"><br>
+
+        <label for="invoice-classification">Invoice classification</label>
+        <input type="text" id="invoice-classification" name="invoice_classification"
+            placeholder="Invoice classification"><br>
+
+        <label for="invoice-unit-measure">Invoice unit measure</label>
+        <input type="text" id="invoice-unit-measure" name="invoice_unit_measure" placeholder="Invoice unit measure"><br>
+
+        <label for="invoice-hour-rates">Invoice hour rate</label>
+        <input type="number" id="invoice-hour-rates" name="invoice_hour_rates" placeholder="Invoice hour rates"
+            value="150" min="1" max="999"><br>
+
+        <label for="invoice-hours-number">Invoice hour number</label>
+        <input type="number" id="invoice-hours-number" name="invoice_hours_number" placeholder="Invoice hours number"
+            value="0" min="1" max="999"><br>
+
+        <label for="invoice-currency">Invoice currency</label>
+        <input type="text" id="invoice-currency" name="invoice_currency" placeholder="Invoice currency"><br>
+
+
+        <input type="submit" value="send">
+    </form>
+</body>
+
+</html>
