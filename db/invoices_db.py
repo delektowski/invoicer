@@ -2,30 +2,32 @@ import sqlite3
 
 from db.helper import db_response_to_dict
 
-conn = sqlite3.connect("invoices.db")
 
-cur = conn.cursor()
 
-mock_data = (
-    "krowa",
-    "2024-01-17",
-    "2024-02-01",
-    "Credit Card",
-    "123456789",
-    "Seller Co.",
-    "123 Main St, City",
-    "1234567890",
-    "Buyer Inc.",
-    "456 Oak St, Town",
-    "9876543210",
-    "Product ABC",
-    "Class A",
-    "Unit",
-    50.0,
-    10,
+initial_invoice = (
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    0,
+    0,
 )
 
+
 def create_table(table_name):
+    conn = sqlite3.connect("invoices.db")
+    cur = conn.cursor()
+
     create_table_query = """
     CREATE TABLE IF NOT EXISTS {} (
         id INTEGER PRIMARY KEY,
@@ -55,6 +57,8 @@ def create_table(table_name):
 
 
 def insert_invoice(table_name, data):
+    conn = sqlite3.connect("invoices.db")
+    cur = conn.cursor()
     insert_data_query = """
     INSERT INTO {} (
         invoice_number, invoice_date, invoice_pay_date, invoice_pay_type, invoice_account_number,
@@ -66,7 +70,7 @@ def insert_invoice(table_name, data):
     """.format(
         table_name
     )
-
+    print(data)
     cur.execute(
         insert_data_query,
         data,
@@ -75,6 +79,8 @@ def insert_invoice(table_name, data):
 
 
 def is_table_exist(table_name):
+    conn = sqlite3.connect("invoices.db")
+    cur = conn.cursor()
     check_table_exist_query = """
     SELECT name FROM sqlite_master WHERE type='table' AND name=?;
     """
@@ -85,6 +91,8 @@ def is_table_exist(table_name):
 
 
 def get_invoice():
+    conn = sqlite3.connect("invoices.db")
+    cur = conn.cursor()
     if is_table_exist("invoices"):
         query = """
         SELECT * FROM invoices ORDER BY id DESC LIMIT 1
@@ -97,13 +105,7 @@ def get_invoice():
         return latest_invoice_dict
 
 
-# if not is_table_exist("invoices"):
-#     create_table("invoices")
-#     insert_invoice(table_name="invoices", data=mock_data)
-#     get_invoice()
-# else:
-#     insert_invoice(table_name="invoices", data=mock_data)
-#     get_invoice()
-
-
-
+def handle_table_creation():
+    if not is_table_exist("invoices"):
+        create_table("invoices")
+        insert_invoice(table_name="invoices", data=initial_invoice)

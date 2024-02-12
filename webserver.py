@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Annotated
-from db.invoices_db import get_invoice
+from db.invoices_db import get_invoice, handle_table_creation, insert_invoice
 from pdf_creator import PdfCreator
 
 
@@ -15,13 +15,13 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 templates = Jinja2Templates(directory="templates")
 
-invoice_file_path = "invoice_template_modyfied.docx"
+handle_table_creation()
 
 @app.get("/")
 async def send_invoice_webpage(request: Request):
     latest_invoice = get_invoice()
-    print('kukui',latest_invoice)
-    return templates.TemplateResponse(request=request, name="invoice_form.html", context={"invoice_number": latest_invoice["invoice_number"]})
+    print(latest_invoice)
+    return templates.TemplateResponse(request=request, name="invoice_form.html", context=latest_invoice)
 
 @app.get("/invoice")
 async def send_invoice_webpage(request: Request):
@@ -41,6 +41,7 @@ async def send_invoice_webpage(request: Request):
     invoice_unit_measure = request.query_params.get("invoice_unit_measure")
     invoice_hour_rates = request.query_params.get("invoice_hour_rates")
     invoice_hours_number = request.query_params.get("invoice_hours_number")
+
 
     return templates.TemplateResponse(
         request=request,
@@ -72,7 +73,7 @@ def send_file():
 
 @app.get("/pdf",status_code=201)
 def send_pdf(request: Request):
-    print('request: ', request.query_params)
+    print('request: ', request.base_url)
     # pdf_creator = PdfCreator()
     # return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
 
@@ -89,15 +90,14 @@ def get_form(
     invoice_buyer_name: Annotated[str, Form()],
     invoice_buyer_address: Annotated[str, Form()],
     invoice_buyer_nip: Annotated[str, Form()],
-    invoice_specyfication: Annotated[str, Form()],
+    invoice_specification: Annotated[str, Form()],
     invoice_classification: Annotated[str, Form()],
     invoice_unit_measure: Annotated[str, Form()],
     invoice_hour_rates: Annotated[str, Form()],
     invoice_hours_number: Annotated[str, Form()],
 ):
-    redirect_url = "/invoice?" + "&".join(
-        f"{key}={value}"
-        for key, value in {
+    
+    invoice_dict = {
             "invoice_number": invoice_number,
             "invoice_date": invoice_date,
             "invoice_pay_date": invoice_pay_date,
@@ -109,14 +109,19 @@ def get_form(
             "invoice_buyer_name": invoice_buyer_name,
             "invoice_buyer_address": invoice_buyer_address,
             "invoice_buyer_nip": invoice_buyer_nip,
-            "invoice_specyfication": invoice_specyfication,
+            "invoice_specification": invoice_specification,
             "invoice_classification": invoice_classification,
             "invoice_unit_measure": invoice_unit_measure,
             "invoice_unit_measure": invoice_unit_measure,
             "invoice_unit_measure": invoice_unit_measure,
             "invoice_hour_rates": invoice_hour_rates,
             "invoice_hours_number": invoice_hours_number,
-        }.items()
+        }
+    
+    insert_invoice(table_name="invoices", data=tuple(invoice_dict.values()))
+    redirect_url = "/invoice?" + "&".join(
+        f"{key}={value}"
+        for key, value in invoice_dict.items()
     )
     response = RedirectResponse(url=redirect_url, status_code=301)
 
