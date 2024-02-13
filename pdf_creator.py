@@ -11,7 +11,7 @@ class PdfCreator:
         "margin-left": "0mm",
     }
 
-    output_pdf_path = "output2.pdf"
+    output_pdf_path = "output3.pdf"
 
     def __init__(self, website_url) -> None:
         self.website_url = website_url

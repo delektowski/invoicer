@@ -12,9 +12,7 @@ def number_to_word(liczba:float, skala:str='długa', jeden:bool=True):
         raise ValueError('Zbyt duża liczba.')
     
     setna = get_decimal(liczba)
-    print(setna)
     liczba = int(liczba)
-    print(setna)
     jedności   = ('', 'jeden',      'dwa',         'trzy',        'cztery',       'pięć',         'sześć',         'siedem',         'osiem',         'dziewięć')
     naście     = ('', 'jedenaście', 'dwanaście',   'trzynaście',  'czternaście',  'piętnaście',   'szesnaście',    'siedemnaście',   'osiemnaście',   'dziewiętnaście')
     dziesiątki = ('', 'dziesięć',   'dwadzieścia', 'trzydzieści', 'czterdzieści', 'pięćdziesiąt', 'sześćdziesiąt', 'siedemdziesiąt', 'osiemdziesiąt', 'dziewięćdziesiąt')

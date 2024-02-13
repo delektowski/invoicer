@@ -1,27 +1,10 @@
 import sqlite3
 
-from db.helper import db_response_to_dict
+from db.helper import db_response_to_dict, initial_invoice
 
 
 
-initial_invoice = (
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    0,
-    0,
-)
+
 
 
 def create_table(table_name):
@@ -70,7 +53,7 @@ def insert_invoice(table_name, data):
     """.format(
         table_name
     )
-    print(data)
+   
     cur.execute(
         insert_data_query,
         data,
@@ -100,12 +83,10 @@ def get_invoice():
         get_latest_invoice = cur.execute(query)
         latest_invoice_values = get_latest_invoice.fetchone()
         latest_invoice_dict = db_response_to_dict(cur, latest_invoice_values)
-        print(latest_invoice_dict)
-        # conn.close()
         return latest_invoice_dict
 
 
 def handle_table_creation():
     if not is_table_exist("invoices"):
         create_table("invoices")
-        insert_invoice(table_name="invoices", data=initial_invoice)
+        insert_invoice(table_name="invoices", data= initial_invoice)
