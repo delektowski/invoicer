@@ -42,10 +42,6 @@ async def send_invoice_webpage(request: Request):
     invoice_hour_rates = request.query_params.get("invoice_hour_rates")
     invoice_hours_number = request.query_params.get("invoice_hours_number")
 
-    
-    print("koza2", request.url)
-    pdf_creator = PdfCreator("http://127.0.0.1:8000/")
-    pdf_creator.create_pdf()
     return templates.TemplateResponse(
         request=request,
         name="invoice_page.html",
@@ -122,6 +118,6 @@ def get_form(request: Request,
         f"{key}={value}"
         for key, value in invoice_dict.items()
     )
-    # response = RedirectResponse(url=redirect_url, status_code=301)
+    response = RedirectResponse(url=redirect_url, status_code=301)
 
-    # return response
+    return response

@@ -9,27 +9,14 @@
 </head>
 
 <body>
-    <div class="container">
-        <p>invoice_number: {{invoice_number}}</p>
-        <p>invoice_date: {{invoice_date}}</p>
-        <p>invoice_pay_date: {{invoice_pay_date}}</p>
-        <p>invoice_pay_type: {{invoice_pay_type}}</p>
-        <p>invoice_account_number: {{invoice_account_number}}</p>
-        <p>invoice_seller_name: {{invoice_seller_name}}</p>
-        <p>invoice_seller_address: {{invoice_seller_address}}</p>
-        <p>invoice_seller_nip: {{invoice_seller_nip}}</p>
-        <p>invoice_buyer_name: {{invoice_buyer_name}}</p>
-        <p>invoice_buyer_address: {{invoice_buyer_address}}</p>
-        <p>invoice_buyer_nip: {{invoice_buyer_nip}}</p>
-        <p>invoice_specyfication: {{invoice_specyfication}}</p>
-        <p>invoice_classification: {{invoice_classification}}</p>
-        <p>invoice_unit_measure: {{invoice_unit_measure}}</p>
-        <p>invoice_hour_rates: {{invoice_hour_rates}}</p>
-        <p>invoice_hours_number: {{invoice_hours_number}}</p>
+    <div class="invoice-confirmation">
+        
+            <p>Invoice has been created!</p>
+            <form action="/file" method="get">
+                <button type="submit">Download pdf</button>
+            </form>
+        
     </div>
-    <form action="/pdf" method="get">
-        <input type="submit" value="koza">
-    </form>
 </body>
 
 </html>

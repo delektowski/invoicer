@@ -59,3 +59,17 @@ input {
     height: 40px;
     background-color: rgba(245, 245, 245, 0.753);
 }
+
+.invoice-confirmation {
+    padding: 20px 100px;
+    margin: 40vh auto;
+    background-color: whitesmoke;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-items: center; 
+    justify-items: center;
+}
+
+.invoice-confirmation > p {
+    /* text-align: center; */
+}
