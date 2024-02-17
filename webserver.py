@@ -42,7 +42,10 @@ async def send_invoice_webpage(request: Request):
     invoice_hour_rates = request.query_params.get("invoice_hour_rates")
     invoice_hours_number = request.query_params.get("invoice_hours_number")
 
-
+    
+    print("koza2", request.url)
+    pdf_creator = PdfCreator("http://127.0.0.1:8000/")
+    pdf_creator.create_pdf()
     return templates.TemplateResponse(
         request=request,
         name="invoice_page.html",
@@ -68,17 +71,12 @@ async def send_invoice_webpage(request: Request):
 
 @app.get("/file")
 def send_file():
-    custom_filename = "invoice.docx"
+    invoice_file_path ="./output3.pdf"
+    custom_filename = "output3.pdf"
     return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
 
-@app.get("/pdf",status_code=201)
-def send_pdf(request: Request):
-    print('request: ', request.base_url)
-    # pdf_creator = PdfCreator()
-    # return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
-
 @app.post("/form", status_code=201)
-def get_form(
+def get_form(request: Request,
     invoice_number: Annotated[str, Form()],
     invoice_date: Annotated[str, Form()],
     invoice_pay_date: Annotated[str, Form()],
@@ -117,8 +115,9 @@ def get_form(
             "invoice_hour_rates": invoice_hour_rates,
             "invoice_hours_number": invoice_hours_number,
         }
-    
     insert_invoice(table_name="invoices", data=tuple(invoice_dict.values()))
+    pdf_creator = PdfCreator(str(request.base_url))
+    pdf_creator.create_pdf()
     redirect_url = "/invoice?" + "&".join(
         f"{key}={value}"
         for key, value in invoice_dict.items()

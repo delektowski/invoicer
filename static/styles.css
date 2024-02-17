@@ -1,12 +1,45 @@
-body {
-    background-color: gray;
-}
-
 .container {
     
-   margin: 5rem auto;
-
-   background-color: antiquewhite;
-   /* padding-inline-start: 25rem; */
+    margin: 50px auto;
+    height: 780px;
+    font-size: 17px;
+    width: 800px;
+    background-color: whitesmoke
 }
 
+button {
+    margin-top: 50px;
+    width: 100px;
+    height: 40px;
+    background-color: rgba(245, 245, 245, 0.753);
+}
+
+.field {
+    padding: 0 10px;
+    display: flex;
+    flex: 1;
+    
+    border: 1px black solid;
+}
+
+.field--gray {
+    background-color: rgb(200, 200, 200);
+}
+
+.fields-container {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+input {
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+}
