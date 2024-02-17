@@ -13,10 +13,10 @@
 
 <body>
     <div class="container">
-        <h1>invoice</h1>
         <form action="/form/" method="post">
             <div class="fields-container">
-                <div class="field field--gray">
+                
+                <div class="field--gray">
                     <h2>Number</h2>
                 </div>
                 <div class="field">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Date</h2>
                 </div>
                 <div class="field">
@@ -36,7 +36,17 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
+                    <h2>Pay date</h2>
+                </div>
+                <div class="field">
+                    <input type="date" id="invoice-pay-date" name="invoice_pay_date" placeholder="invoice pay date"
+                        value="{{invoice_pay_date}}">
+                </div>
+            </div>
+
+            <div class="fields-container">
+                <div class="field--gray">
                     <h2>Pay type</h2>
                 </div>
                 <div class="field">
@@ -46,7 +56,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Account number</h2>
                 </div>
                 <div class="field">
@@ -55,8 +65,11 @@
                 </div class="fields-container">
             </div>
 
+
+
+
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Seller name</h2>
                 </div>
                 <div class="field">
@@ -66,7 +79,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Seller address</h2>
                 </div>
                 <div class="field">
@@ -76,7 +89,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Seller nip</h2>
                 </div>
                 <div class="field">
@@ -86,7 +99,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Buyer name</h2>
                 </div>
                 <div class="field">
@@ -96,7 +109,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Buyer address</h2>
                 </div>
                 <div class="field">
@@ -106,7 +119,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Buyer nip</h2>
                 </div>
                 <div class="field">
@@ -115,9 +128,8 @@
                 </div class="fields-container">
             </div>
 
-
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Specification</h2>
                 </div>
                 <div class="field">
@@ -127,7 +139,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Classification</h2>
                 </div>
                 <div class="field">
@@ -137,7 +149,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Unit measure</h2>
                 </div>
                 <div class="field">
@@ -147,7 +159,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Hour rate</h2>
                 </div>
                 <div class="field">
@@ -157,7 +169,7 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Hour number</h2>
                 </div>
                 <div class="field">
@@ -167,15 +179,18 @@
             </div>
 
             <div class="fields-container">
-                <div class="field field--gray">
+                <div class="field--gray">
                     <h2>Currency</h2>
                 </div>
                 <div class="field">
                     <input disabled type="text" id="invoice-currency" name="invoice_currency"
                         placeholder="Invoice currency" value="PLN"><br>
                 </div class="fields-container">
+                
             </div>
-            <button type="submit">Create PDF</button>
+            <div class="fields-container">
+                <button type="submit">Create PDF</button>
+            </div class="fields-container">
         </form>
     </div>
 </body>

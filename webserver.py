@@ -122,6 +122,6 @@ def get_form(request: Request,
         f"{key}={value}"
         for key, value in invoice_dict.items()
     )
-    response = RedirectResponse(url=redirect_url, status_code=301)
+    # response = RedirectResponse(url=redirect_url, status_code=301)
 
-    return response
+    # return response
