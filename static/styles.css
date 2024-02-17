@@ -8,7 +8,6 @@ body {
     background-color: whitesmoke
 }
 
-
 .field--gray {
     display: -webkit-box;
     width: 200px;
@@ -16,6 +15,7 @@ body {
     display: flex;
     border: 1px black solid;
     background-color: rgb(200, 200, 200);
+    border-bottom: none;
 }
 
 .field {
@@ -25,13 +25,17 @@ body {
     padding: 0 10px;
     display: flex;
     border: 1px black solid;
+    border-bottom: none;
+    border-left: none;
 }
 
+.field--border-bottom {
+    border-bottom: 1px black solid;
+}
 
-.field--gray> h2 {
+.field--gray>h2 {
     font-size: 16px;
 }
-
 
 .fields-container {
     display: -webkit-box;
@@ -66,10 +70,6 @@ input {
     background-color: whitesmoke;
     display: grid;
     grid-template-rows: 1fr 1fr;
-    align-items: center; 
+    align-items: center;
     justify-items: center;
-}
-
-.invoice-confirmation > p {
-    /* text-align: center; */
 }

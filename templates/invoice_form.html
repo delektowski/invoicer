@@ -15,7 +15,7 @@
     <div class="container">
         <form action="/form/" method="post">
             <div class="fields-container">
-                
+
                 <div class="field--gray">
                     <h2>Number</h2>
                 </div>
@@ -64,9 +64,6 @@
                         placeholder="Invoice account number" value="{{invoice_account_number}}">
                 </div class="fields-container">
             </div>
-
-
-
 
             <div class="fields-container">
                 <div class="field--gray">
@@ -177,16 +174,14 @@
                         placeholder="Invoice hours number" value="{{invoice_hours_number}}" min="1" max="999"><br>
                 </div class="fields-container">
             </div>
-
             <div class="fields-container">
-                <div class="field--gray">
+                <div class="field--gray field--border-bottom">
                     <h2>Currency</h2>
                 </div>
-                <div class="field">
+                <div class="field field--border-bottom">
                     <input disabled type="text" id="invoice-currency" name="invoice_currency"
                         placeholder="Invoice currency" value="PLN"><br>
                 </div class="fields-container">
-                
             </div>
             <div class="fields-container">
                 <button type="submit">Create PDF</button>
