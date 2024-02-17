@@ -25,50 +25,21 @@ async def send_invoice_webpage(request: Request):
 
 @app.get("/invoice")
 async def send_invoice_webpage(request: Request):
-    invoice_number = request.query_params.get("invoice_number")
-    invoice_date = request.query_params.get("invoice_date")
-    invoice_pay_date = request.query_params.get("invoice_pay_date")
-    invoice_pay_type = request.query_params.get("invoice_pay_type")
-    invoice_account_number = request.query_params.get("invoice_account_number")
-    invoice_seller_name = request.query_params.get("invoice_seller_name")
-    invoice_seller_address = request.query_params.get("invoice_seller_address")
-    invoice_seller_nip = request.query_params.get("invoice_seller_nip")
-    invoice_buyer_name = request.query_params.get("invoice_buyer_name")
-    invoice_buyer_address = request.query_params.get("invoice_buyer_address")
-    invoice_buyer_nip = request.query_params.get("invoice_buyer_nip")
-    invoice_specyfication = request.query_params.get("invoice_specyfication")
-    invoice_classification = request.query_params.get("invoice_classification")
-    invoice_unit_measure = request.query_params.get("invoice_unit_measure")
-    invoice_hour_rates = request.query_params.get("invoice_hour_rates")
-    invoice_hours_number = request.query_params.get("invoice_hours_number")
-
+   
+    
+ 
     return templates.TemplateResponse(
         request=request,
         name="invoice_page.html",
-        context={
-            "invoice_number": invoice_number,
-            "invoice_date": invoice_date,
-            "invoice_pay_date": invoice_pay_date,
-            "invoice_pay_type": invoice_pay_type,
-            "invoice_account_number": invoice_account_number,
-            "invoice_seller_name": invoice_seller_name,
-            "invoice_seller_address": invoice_seller_address,
-            "invoice_seller_nip": invoice_seller_nip,
-            "invoice_buyer_name": invoice_buyer_name,
-            "invoice_buyer_address": invoice_buyer_address,
-            "invoice_buyer_nip": invoice_buyer_nip,
-            "invoice_specyfication": invoice_specyfication,
-            "invoice_classification": invoice_classification,
-            "invoice_unit_measure": invoice_unit_measure,
-            "invoice_hour_rates": invoice_hour_rates,
-            "invoice_hours_number": invoice_hours_number,
-        },
+       
     )
 
 @app.get("/file")
-def send_file():
+def send_file(request: Request):
     invoice_file_path ="./output3.pdf"
     custom_filename = "output3.pdf"
+
+  
     return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
 
 @app.post("/form", status_code=201)
@@ -114,10 +85,7 @@ def get_form(request: Request,
     insert_invoice(table_name="invoices", data=tuple(invoice_dict.values()))
     pdf_creator = PdfCreator(str(request.base_url))
     pdf_creator.create_pdf()
-    redirect_url = "/invoice?" + "&".join(
-        f"{key}={value}"
-        for key, value in invoice_dict.items()
-    )
+    redirect_url = "/invoice"
     response = RedirectResponse(url=redirect_url, status_code=301)
 
     return response
