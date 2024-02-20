@@ -130,7 +130,7 @@
             <div class="horizontal-empty-space"></div>
 
             <div class="invoice-specs">
-                <div class="fields-container--columns fields-container--columns__on">
+                <div>
                     <div class="field--gray--columns field--gray--columns__on">
                         <h2>on</h2>
                     </div>
@@ -139,51 +139,51 @@
                             placeholder="Invoice specification" value="1">
                     </div>
                 </div>
-                <div class="fields-container--columns">
+                <div>
                     <div class="field--gray--columns field--gray--columns__specification field--border-left-none">
                         <h2>Specification</h2>
                     </div>
-                    <div class="field--column field--border-bottom">
-                        <input type="text" id="invoice-specification" name="invoice_specification"
-                            placeholder="Invoice specification" value="{{invoice_specification}}">
+                    <div class="field--column field--column__specification field--border-bottom">
+                        <textarea rows="4" cols="50" id="invoice-specification" name="invoice_specification"
+                            placeholder="Invoice specification">{{invoice_specification}}</textarea>
                     </div>
                 </div>
 
-                <div class="fields-container--columns">
-                    <div class="field--gray--columns field--border-left-none ">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__classification field--border-left-none ">
                         <h2>Classification</h2>
                     </div>
-                    <div class="field--column  field--border-bottom">
+                    <div class="field--column field--column__classification  field--border-bottom">
                         <input type="text" id="invoice-classification" name="invoice_classification"
                             placeholder="Invoice classification" value="{{invoice_classification}}"><br>
                     </div>
                 </div>
 
-                <div class="fields-container--columns">
-                    <div class="field--gray--columns field--border-left-none">
-                        <h2>Unit measure</h2>
+                <div>
+                    <div class="field--gray--columns field--gray--columns__unit-measure">
+                        <h2>Unit m.</h2>
                     </div>
-                    <div class="field--column  field--border-bottom">
+                    <div class="field--column field--column__unit-measure  field--border-bottom">
                         <input type="text" id="invoice-unit-measure" name="invoice_unit_measure"
                             placeholder="Invoice unit measure" value="{{invoice_unit_measure}}"><br>
                     </div>
                 </div>
 
-                <div class="fields-container--columns">
-                    <div class="field--gray--columns field--border-left-none ">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__hour-rates field--border-left-none ">
                         <h2>Hour rate</h2>
                     </div>
-                    <div class="field--column  field--border-bottom">
+                    <div class="field--column field--column__hour-rates  field--border-bottom">
                         <input type="number" id="invoice-hour-rates" name="invoice_hour_rates"
                             placeholder="Invoice hour rates" value="{{invoice_hour_rates}}" min="1" max="999"><br>
                     </div>
                 </div>
 
-                <div class="fields-container--columns">
-                    <div class="field--gray--columns field--border-left-none ">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__hours-number field--border-left-none ">
                         <h2>Hour number</h2>
                     </div>
-                    <div class="field--column  field--border-bottom">
+                    <div class="field--column field--column__hours-number  field--border-bottom">
                         <input type="number" id="invoice-hours-number" name="invoice_hours_number"
                             placeholder="Invoice hours number" value="{{invoice_hours_number}}" min="1" max="999"><br>
                     </div>
@@ -191,7 +191,6 @@
             </div>
 
             <div class="horizontal-empty-space"></div>
-
             <div class="fields-container">
                 <div class="field--gray field--border-bottom">
                     <h2>Currency</h2>

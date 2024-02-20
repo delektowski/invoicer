@@ -5,10 +5,10 @@ class PdfCreator:
     # Configure PDF options
     options = {
         "page-size": "A4",
-        "margin-top": "0mm",
-        "margin-right": "0mm",
-        "margin-bottom": "0mm",
-        "margin-left": "0mm",
+        "margin-top": "20mm",
+        "margin-right": "20mm",
+        "margin-bottom": "20mm",
+        "margin-left": "20mm",
     }
 
     output_pdf_path = "output3.pdf"

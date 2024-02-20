@@ -3,9 +3,20 @@ body {
 }
 
 .container {
-    padding: 20px 100px;
+    max-width: 785px;
+    
+    padding-block: 50px;
     margin: 20px auto;
-    background-color: whitesmoke
+}
+
+input {
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
 }
 
 .field--gray {
@@ -21,7 +32,7 @@ body {
 .field--gray--columns {
 
     padding: 0 10px;
-
+    height: 50px;
     border: 1px black solid;
     background-color: rgb(200, 200, 200);
     border-bottom: none;
@@ -39,18 +50,60 @@ body {
 }
 
 .field--column {
+    height: 80px;
     padding: 0 10px;
     border: 1px black solid;
     border-bottom: none;
     border-left: none;
 }
 
+
+.field--gray--columns__on {
+    width: 20px;
+}
+
 .field--column__on {
-    width: 30px;
+    width: 20px;
 }
 
 .field--column__specification {
     width: 300px;
+}
+
+.field--gray--columns__specification {
+    width: 300px;
+}
+
+.field--column__classification {
+    width: 100px;
+}
+
+.field--gray--columns__classification {
+    width: 100px;
+}
+
+.field--column__unit-measure {
+    width: 30px;
+}
+
+.field--gray--columns__unit-measure {
+    width: 30px;
+}
+
+.field--column__hour-rates {
+    width: 30px;
+}
+
+.field--gray--columns__hour-rates {
+    width: 30px;
+}
+
+.field--column__hours-number {
+    width: 177px;
+}
+
+.field--gray--columns__hours-number {
+    width: 177px;
 }
 
 .field--border-bottom {
@@ -72,14 +125,6 @@ body {
     margin: 0;
 }
 
-.field--gray--columns__on {
-    width: 30px;
-}
-
-.field--gray--columns__specification {
-    width: 300px;
-}
-
 .fields-container {
     display: -webkit-box;
     display: flex;
@@ -88,12 +133,6 @@ body {
 }
 
 .fields-container--columns {
-    -webkit-box-flex: 5;
-    -webkit-flex: 5;
-    flex: 5;
-}
-
-.fields-container--columns__on {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
@@ -108,7 +147,6 @@ body {
     display: flex;
     -webkit-box-pack: start;
     justify-content: start;
-
 }
 
 .horizontal-empty-space {
@@ -116,7 +154,7 @@ body {
     height: 40px;
 }
 
-input {
+textarea {
     border: none;
     background-image: none;
     background-color: transparent;
@@ -124,6 +162,8 @@ input {
     -moz-box-shadow: none;
     box-shadow: none;
     outline: none;
+    width: 100%; 
+    resize: none;
 }
 
 .fields-container>button {
