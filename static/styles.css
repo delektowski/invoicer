@@ -4,7 +4,7 @@ body {
 
 .container {
     max-width: 785px;
-    
+
     padding-block: 50px;
     margin: 20px auto;
 }
@@ -21,29 +21,42 @@ input {
 
 .field--gray {
     display: -webkit-box;
-    width: 200px;
+    -webkit-box-align: center;
+    width: 150px;
+    height: 40px;
     padding: 0 10px;
     display: flex;
+    align-items: center;
     border: 1px black solid;
     background-color: rgb(200, 200, 200);
     border-bottom: none;
 }
 
 .field--gray--columns {
-
+    display: -webkit-box;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
     padding: 0 10px;
-    height: 50px;
+    height: 45px;
     border: 1px black solid;
     background-color: rgb(200, 200, 200);
     border-bottom: none;
 }
 
 .field {
-    -webkit-box-flex: 3;
-    -webkit-flex: 3;
-    flex: 3;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
     padding: 0 10px;
     display: flex;
+    border: 1px black solid;
+    border-bottom: none;
+    border-left: none;
+}
+
+.field--bottom {
+    padding: 0 10px;
     border: 1px black solid;
     border-bottom: none;
     border-left: none;
@@ -58,10 +71,6 @@ input {
 }
 
 
-.field--gray--columns__on {
-    width: 20px;
-}
-
 .field--column__on {
     width: 20px;
 }
@@ -70,44 +79,36 @@ input {
     width: 300px;
 }
 
-.field--gray--columns__specification {
-    width: 300px;
-}
-
 .field--column__classification {
-    width: 100px;
-}
-
-.field--gray--columns__classification {
-    width: 100px;
+    width: 50px;
 }
 
 .field--column__unit-measure {
     width: 30px;
 }
 
-.field--gray--columns__unit-measure {
-    width: 30px;
-}
-
 .field--column__hour-rates {
-    width: 30px;
-}
-
-.field--gray--columns__hour-rates {
-    width: 30px;
+    width: 80px;
 }
 
 .field--column__hours-number {
     width: 177px;
 }
 
-.field--gray--columns__hours-number {
-    width: 177px;
-}
-
 .field--border-bottom {
     border-bottom: 1px black solid;
+}
+
+.field--border-top {
+    border-top: 1px black solid;
+}
+
+.field--border-top-none {
+    border-top: none;
+}
+
+.field--border-bottom-none {
+    border-bottom: none;
 }
 
 .field--border-left {
@@ -125,11 +126,25 @@ input {
     margin: 0;
 }
 
-.fields-container {
+.fields-container--vertical {
+    padding-right: 1px;
+}
+
+.fields-container--horizonal {
     display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.fields-container--horizonal-bottom {
+    border-right: 1px black solid;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
 }
 
 .fields-container--columns {
@@ -162,7 +177,7 @@ textarea {
     -moz-box-shadow: none;
     box-shadow: none;
     outline: none;
-    width: 100%; 
+    width: 100%;
     resize: none;
 }
 
@@ -183,4 +198,11 @@ textarea {
     grid-template-rows: 1fr 1fr;
     align-items: center;
     justify-items: center;
+}
+
+.button-container {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
 }
