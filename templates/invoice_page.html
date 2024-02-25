@@ -15,6 +15,221 @@
             <button type="submit">Download pdf</button>
         </form>
     </div>
+
+    <div class="container">
+        <form action="/form/" method="post">
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>Number</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_number}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>Date</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_date}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>Pay date</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_pay_date}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>Pay type</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_pay_type}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray field--border-bottom">
+                    <h2>Account number</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{invoice_account_number}}</p>
+                </div>
+            </div>
+
+            <div class="horizontal-empty-space"></div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>Seller name</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_name}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>Seller address</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_address}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>Seller nip</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_nip}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>Buyer name</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_buyer_name}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>Buyer address</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_buyer_address}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray field--border-bottom">
+                    <h2>Buyer nip</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{invoice_buyer_nip}}</p>
+                </div>
+            </div>
+
+            <div class="horizontal-empty-space"></div>
+
+            <div class="invoice-specs">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__on">
+                        <h2>on</h2>
+                    </div>
+                    <div class="field--column field--column__on field--border-left field--border-bottom">
+                        <p>1</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="field--gray--columns field--column__specification field--border-left-none">
+                        <h2>Specification</h2>
+                    </div>
+                    <div class="field--column field--column__specification field--border-bottom"><p>{{invoice_specification}}</p></div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__classification field--border-left-none ">
+                        <h2>Class</h2>
+                    </div>
+                    <div class="field--column field--column__classification  field--border-bottom">
+                        <p>{{invoice_classification}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__unit-measure field--border-left-none">
+                        <h2>Unit m.</h2>
+                    </div>
+                    <div class="field--column field--column__unit-measure  field--border-bottom ">
+                        <p>{{invoice_unit_measure}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__hour-rates field--border-left-none ">
+                        <h2>Hour rate</h2>
+                    </div>
+                    <div class="field--column field--column__hour-rates  field--border-bottom">
+                        <p>{{invoice_hour_rates}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__hours-number field--border-left-none ">
+                        <h2>Hour number</h2>
+                    </div>
+                    <div class="field--column field--column__hours-number  field--border-bottom">
+                        <p>{{invoice_hours_number}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fields-container--vertical">
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>Netto</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_netto_value}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>VAT value (23%)</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_vat_value}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>Netto + VAT</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_brutto_value}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>Currency</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+                        <p>PLN</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div
+                        class="field--gray field--column__hour-rates field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <h2>In words</h2>
+                    </div>
+                    <div
+                        class="field--bottom field--column__hours-number field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <p>{{invoice_value_in_words}}</p>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>

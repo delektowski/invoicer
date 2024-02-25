@@ -1,5 +1,10 @@
-body {
+body, input, textarea, p, h2 {
     box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif, monospace;
+    font-weight: 300;
+    margin: 0;
+    font-size: 14px;
+    
 }
 
 .container {
@@ -45,6 +50,7 @@ input {
 }
 
 .field {
+    display: -webkit-box;
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     flex: 1;
@@ -53,9 +59,15 @@ input {
     border: 1px black solid;
     border-bottom: none;
     border-left: none;
+    align-items: center;
+    -webkit-box-align: center;
 }
 
 .field--bottom {
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
     padding: 0 10px;
     border: 1px black solid;
     border-bottom: none;
@@ -63,6 +75,10 @@ input {
 }
 
 .field--column {
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
     height: 80px;
     padding: 0 10px;
     border: 1px black solid;
@@ -95,6 +111,11 @@ input {
     width: 177px;
 }
 
+.field--invoice-value-in-words {
+    height: 177px;
+    word-wrap: break-word;
+}
+
 .field--border-bottom {
     border-bottom: 1px black solid;
 }
@@ -121,9 +142,9 @@ input {
 
 .field--gray--columns>h2,
 .field--gray>h2 {
-    font-size: 16px;
+    /* font-size: 16px;
     font-weight: 300;
-    margin: 0;
+    margin: 0; */
 }
 
 .fields-container--vertical {
@@ -192,7 +213,7 @@ textarea {
 
 .invoice-confirmation {
     padding: 20px 100px;
-    margin: 40vh auto;
+    margin: 2vh auto;
     background-color: whitesmoke;
     display: grid;
     grid-template-rows: 1fr 1fr;
@@ -205,4 +226,10 @@ textarea {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
+}
+
+.field--bottom>p {
+    /* font-size: 16px;
+    font-weight: 300;
+    margin: 0; */
 }
