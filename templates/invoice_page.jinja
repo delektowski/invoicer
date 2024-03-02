@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <title>Invoicer</title>
+</head>
+
+<body>
+    <div class="invoice-confirmation">
+        <p>Invoice has been created!</p>
+        <form action="/file" method="get">
+            <button type="submit">Download pdf</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <form action="/form/" method="post">
+            {% for section, val in invoice_dict.items() %}
+
+            <!-- TOP SECTION -->
+            {% if 'invoice_top_section' == section %}
+            {% for key, value in val.items() %}
+            <div class="fields-container--horizonal fields-container--padding-left">
+                {% if loop.last %}
+                <div class="field--gray field--border-bottom">
+                    <h2>{{value[1]}}</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{value[0]}}</p>
+                </div>
+                {% else %}
+                <div class="field--gray">
+                    <h2>{{value[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{value[0]}}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="horizontal-empty-space"></div>
+            {% endif %}
+
+            <!-- MIDDLE SECTION -->
+
+            {% if 'invoice_middle_section' == section %}
+            {% for key, value in val.items() %}
+            <div class="fields-container--horizonal">
+                {% if loop.last %}
+                <div class="field--gray field--border-bottom">
+                    <h2>{{value[1]}}</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{value[0]}}</p>
+                </div>
+                {% else %}
+                <div class="field--gray">
+                    <h2>{{value[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{value[0]}}</p>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <div class="horizontal-empty-space"></div>
+            {% endif %}
+
+            <!-- HORIZONTAL SECTION -->
+
+            {% if 'invoice_horizontal_section' == section %}
+            <div class="invoice-specs">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__on">
+                        <h2>on</h2>
+                    </div>
+                    <div class=" field--column field--column__on field--border-left field--border-bottom">
+                        <p>1</p>
+                    </div>
+                </div>
+                {% for key, value in val.items() %}
+                {% if loop.last %}
+                <div>
+
+                    <div class="field--gray--columns field--column__{{value[2]}} field--border-left-none">
+                        <h2>{{value[1]}}</h2>
+                    </div>
+
+
+                    <div class="field--column field--column__{{value[2]}} field--border-bottom">
+                        <p>{{value[0]}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div>
+
+                    <div class="field--gray--columns field--column__{{value[2]}} field--border-left-none">
+                        <h2>{{value[1]}}</h2>
+                    </div>
+
+
+                    <div class="field--column field--column__{{value[2]}} field--border-bottom">
+                        <p>{{value[0]}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <!-- BOTTOM SECTION -->
+
+            {% if 'invoice_bottom_section' == section %}
+            <div class="fields-container--vertical">
+                {% for key, value in val.items() %}
+                {% if loop.last %}
+                <div class="fields-container--horizonal">
+                    <div
+                        class="field--gray field--column__hour-rates field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <h2>{{value[1]}}</h2>
+                    </div>
+                    <div
+                        class="field--bottom field--column__hours-number field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <p>{{value[0]}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>{{value[1]}}</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+                        <p>{{value[0]}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </form>
+    </div>
+</body>
+
+</html>

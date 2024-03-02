@@ -1,10 +1,13 @@
-body, input, textarea, p, h2 {
+body,
+input,
+textarea,
+p,
+h2 {
     box-sizing: border-box;
     font-family: Helvetica, Arial, sans-serif, monospace;
     font-weight: 300;
     margin: 0;
     font-size: 14px;
-    
 }
 
 .container {
@@ -35,6 +38,12 @@ input {
     border: 1px black solid;
     background-color: rgb(200, 200, 200);
     border-bottom: none;
+}
+
+h2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .field--gray--columns {

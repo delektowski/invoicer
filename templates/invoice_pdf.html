@@ -9,13 +9,6 @@
 </head>
 
 <body>
-    <div class="invoice-confirmation">
-        <p>Invoice has been created!</p>
-        <form action="/file" method="get">
-            <button type="submit">Download pdf</button>
-        </form>
-    </div>
-
     <div class="container">
         <form action="/form/" method="post">
 
@@ -135,7 +128,9 @@
                     <div class="field--gray--columns field--column__specification field--border-left-none">
                         <h2>Specification</h2>
                     </div>
-                    <div class="field--column field--column__specification field--border-bottom"><p>{{invoice_specification}}</p></div>
+                    <div class="field--column field--column__specification field--border-bottom">
+                        <p>{{invoice_specification}}</p>
+                    </div>
                 </div>
 
                 <div>
@@ -170,7 +165,7 @@
                         <h2>Hour number</h2>
                     </div>
                     <div class="field--column field--column__hours-number  field--border-bottom">
-                        <p>{{invoice_hours_number}}</p>
+                        <p></p>
                     </div>
                 </div>
             </div>
