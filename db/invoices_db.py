@@ -8,7 +8,7 @@ from db.helper import db_response_to_dict, initial_invoice
 
 
 def create_table(table_name):
-    conn = sqlite3.connect("invoices.db")
+    conn = sqlite3.connect("./db/invoices.db")
     cur = conn.cursor()
 
     create_table_query = """
@@ -40,7 +40,7 @@ def create_table(table_name):
 
 
 def insert_invoice(table_name, data):
-    conn = sqlite3.connect("invoices.db")
+    conn = sqlite3.connect("./db/invoices.db")
     cur = conn.cursor()
     insert_data_query = """
     INSERT INTO {} (
@@ -62,7 +62,7 @@ def insert_invoice(table_name, data):
 
 
 def is_table_exist(table_name):
-    conn = sqlite3.connect("invoices.db")
+    conn = sqlite3.connect("./db/invoices.db")
     cur = conn.cursor()
     check_table_exist_query = """
     SELECT name FROM sqlite_master WHERE type='table' AND name=?;
@@ -74,7 +74,7 @@ def is_table_exist(table_name):
 
 
 def get_invoice():
-    conn = sqlite3.connect("invoices.db")
+    conn = sqlite3.connect("./db/invoices.db")
     cur = conn.cursor()
     if is_table_exist("invoices"):
         query = """

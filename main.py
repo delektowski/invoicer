@@ -48,30 +48,6 @@ async def send_invoice_webpage(request: Request):
     invoice_hours_number = request.query_params.get("invoice_hours_number")
 
     invoice_counter = InvoiceCounter(invoice_hour_rates, invoice_hours_number)
-    # invoice_dict = {
-    #     "invoice_number": invoice_number,
-    #     "invoice_date": invoice_date,
-    #     "invoice_pay_date": invoice_pay_date,
-    #     "invoice_pay_type": invoice_pay_type,
-    #     "invoice_account_number": invoice_account_number,
-    #     "invoice_seller_name": invoice_seller_name,
-    #     "invoice_seller_address": invoice_seller_address,
-    #     "invoice_seller_nip": invoice_seller_nip,
-    #     "invoice_buyer_name": invoice_buyer_name,
-    #     "invoice_buyer_address": invoice_buyer_address,
-    #     "invoice_buyer_nip": invoice_buyer_nip,
-    #     "invoice_specification": invoice_specification,
-    #     "invoice_classification": invoice_classification,
-    #     "invoice_unit_measure": invoice_unit_measure,
-    #     "invoice_hour_rates": invoice_hour_rates,
-    #     "invoice_hours_number": invoice_hours_number,
-    #     "invoice_netto_value": invoice_counter.get_netto_value(),
-    #     "invoice_vat_value": invoice_counter.get_vat_value(),
-    #     "invoice_brutto_value": invoice_counter.get_brutto_value(),
-    #     "invoice_value_in_words": number_to_word(float(invoice_counter.get_brutto_value())),
-
-    # }
-
     invoice_dict = {
         "invoice_top_section": {
             "invoice_number": (invoice_number, "invoice_number"),
