@@ -14,51 +14,51 @@
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Number</h2>
+                    <h2 class="field-invoice--bold">{{invoice_fields.invoice_number.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-number" name="invoice_number" placeholder="invoice number"
-                        value="{{invoice_number}}">
+                        value="{{latest_invoice["invoice_number"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Date</h2>
+                    <h2>{{invoice_fields.invoice_date.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="date" id="invoice-date" name="invoice_date" placeholder="invoice date"
-                        value="{{invoice_date}}">
+                        value="{{latest_invoice["invoice_date"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Pay date</h2>
+                    <h2>{{invoice_fields.invoice_pay_date.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="date" id="invoice-pay-date" name="invoice_pay_date" placeholder="invoice pay date"
-                        value="{{invoice_pay_date}}">
+                        value="{{latest_invoice["invoice_pay_date"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Pay type</h2>
+                    <h2>{{invoice_fields.invoice_pay_type.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-pay-type" name="invoice_pay_type" placeholder="invoice pay type"
-                        value="{{invoice_pay_type}}">
+                        value="{{latest_invoice["invoice_pay_type"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray field--border-bottom">
-                    <h2>Account number</h2>
+                    <h2>{{invoice_fields.invoice_account_number.value}}</h2>
                 </div>
                 <div class="field field--border-bottom">
                     <input type="text" id="invoice-account-number" name="invoice_account_number"
-                        placeholder="Invoice account number" value="{{invoice_account_number}}">
+                        placeholder="Invoice account number" value="{{latest_invoice["invoice_account_number"]}}">
                 </div>
             </div>
 
@@ -66,61 +66,61 @@
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller name</h2>
+                    <h2>{{invoice_fields.invoice_seller_name.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-seller-name" name="invoice_seller_name"
-                        placeholder="Invoice seller name" value="{{invoice_seller_name}}">
+                        placeholder="Invoice seller name" value="{{latest_invoice["invoice_seller_name"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller address</h2>
+                    <h2>{{invoice_fields.invoice_seller_address.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-seller-address" name="invoice_seller_address"
-                        placeholder="Invoice seller address" value="{{invoice_seller_address}}">
+                        placeholder="Invoice seller address" value="{{latest_invoice["invoice_seller_address"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller nip</h2>
+                    <h2>{{invoice_fields.invoice_seller_nip.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-seller-nip" name="invoice_seller_nip"
-                        placeholder="Invoice seller nip" value="{{invoice_seller_nip}}">
+                        placeholder="Invoice seller nip" value="{{latest_invoice["invoice_seller_nip"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Buyer name</h2>
+                    <h2>{{invoice_fields.invoice_buyer_name.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-buyer-name" name="invoice_buyer_name"
-                        placeholder="Invoice buyer name" value="{{invoice_buyer_name}}">
+                        placeholder="Invoice buyer name" value="{{latest_invoice["invoice_buyer_name"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Buyer address</h2>
+                    <h2>{{invoice_fields.invoice_buyer_address.value}}</h2>
                 </div>
                 <div class="field">
                     <input type="text" id="invoice-buyer-address" name="invoice_buyer_address"
-                        placeholder="Invoice buyer address" value="{{invoice_buyer_address}}">
+                        placeholder="Invoice buyer address" value="{{latest_invoice["invoice_buyer_address"]}}">
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray field--border-bottom">
-                    <h2>Buyer nip</h2>
+                    <h2>{{invoice_fields.invoice_buyer_nip.value}}</h2>
                 </div>
                 <div class="field field--border-bottom">
                     <input type="text" id="invoice-buyer-nip" name="invoice_buyer_nip" placeholder="Invoice buyer nip"
-                        value="{{invoice_buyer_nip}}">
+                        value="{{latest_invoice["invoice_buyer_nip"]}}">
                 </div>
             </div>
 
@@ -129,7 +129,7 @@
             <div class="invoice-specs">
                 <div>
                     <div class="field--gray--columns field--gray--columns__on">
-                        <h2>on</h2>
+                        <h2>{{invoice_fields.invoice_order_number.value}}</h2>
                     </div>
                     <div class="field--column field--column__on field--border-left field--border-bottom">
                         <input disabled type="text" id="invoice-specification" name="invoice_specification"
@@ -138,51 +138,51 @@
                 </div>
                 <div>
                     <div class="field--gray--columns field--column__specification field--border-left-none">
-                        <h2>Specification</h2>
+                        <h2>{{invoice_fields.invoice_specification.value}}</h2>
                     </div>
                     <div class="field--column field--column__specification field--border-bottom">
                         <textarea rows="4" cols="50" id="invoice-specification" name="invoice_specification"
-                            placeholder="Invoice specification">{{invoice_specification}}</textarea>
+                            placeholder="Invoice specification">{{latest_invoice["invoice_specification"]}}</textarea>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__classification field--border-left-none ">
-                        <h2>Class</h2>
+                        <h2>{{invoice_fields.invoice_classification.value}}</h2>
                     </div>
                     <div class="field--column field--column__classification  field--border-bottom">
                         <input type="text" id="invoice-classification" name="invoice_classification"
-                            placeholder="Invoice classification" value="{{invoice_classification}}"><br>
+                            placeholder="Invoice classification" value="{{latest_invoice["invoice_classification"]}}"><br>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__unit-measure field--border-left-none">
-                        <h2>Unit m.</h2>
+                        <h2>{{invoice_fields.invoice_unit_measure.value}}</h2>
                     </div>
                     <div class="field--column field--column__unit-measure  field--border-bottom ">
                         <input type="text" id="invoice-unit-measure" name="invoice_unit_measure"
-                            placeholder="Invoice unit measure" value="{{invoice_unit_measure}}"><br>
+                            placeholder="Invoice unit measure" value="{{latest_invoice["invoice_unit_measure"]}}"><br>
                     </div>
                 </div>
 
                 <div>
-                    <div class="field--gray--columns field--column__hour-rates field--border-left-none ">
-                        <h2>Hour rate</h2>
+                    <div class="field--gray--columns field--column__horizontal__hour-rates field--border-left-none ">
+                        <h2>{{invoice_fields.invoice_hour_rates.value}}</h2>
                     </div>
-                    <div class="field--column field--column__hour-rates  field--border-bottom">
+                    <div class="field--column field--column__horizontal__hour-rates  field--border-bottom">
                         <input type="number" id="invoice-hour-rates" name="invoice_hour_rates"
-                            placeholder="Invoice hour rates" value="{{invoice_hour_rates}}" min="1" max="999"><br>
+                            placeholder="Invoice hour rates" value="{{latest_invoice["invoice_hour_rates"]}}" min="1" max="999"><br>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__hours-number field--border-left-none ">
-                        <h2>Hour number</h2>
+                        <h2>{{invoice_fields.invoice_hours_number.value}}</h2>
                     </div>
                     <div class="field--column field--column__hours-number  field--border-bottom">
                         <input type="number" id="invoice-hours-number" name="invoice_hours_number"
-                            placeholder="Invoice hours number" value="{{invoice_hours_number}}" min="1" max="999"><br>
+                            placeholder="Invoice hours number" value="{{latest_invoice["invoice_hours_number"]}}" min="1" max="999"><br>
                     </div>
                 </div>
             </div>

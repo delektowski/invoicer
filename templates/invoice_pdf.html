@@ -14,46 +14,46 @@
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Number</h2>
+                    <h2>{{invoice_number[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_number}}</p>
+                    <p>{{invoice_number[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Date</h2>
+                    <h2>{{invoice_date[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_date}}</p>
+                    <p>{{invoice_date[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Pay date</h2>
+                    <h2>{{invoice_pay_date[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_pay_date}}</p>
+                    <p>{{invoice_pay_date[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
-                    <h2>Pay type</h2>
+                    <h2>{{invoice_pay_type[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_pay_type}}</p>
+                    <p>{{invoice_pay_type[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray field--border-bottom">
-                    <h2>Account number</h2>
+                    <h2>{{invoice_account_number[1]}}</h2>
                 </div>
                 <div class="field field--border-bottom">
-                    <p>{{invoice_account_number}}</p>
+                    <p>{{invoice_account_number[0]}}</p>
                 </div>
             </div>
 
@@ -61,55 +61,55 @@
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller name</h2>
+                    <h2>{{invoice_seller_name[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_seller_name}}</p>
+                    <p>{{invoice_seller_name[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller address</h2>
+                    <h2>{{invoice_seller_address[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_seller_address}}</p>
+                    <p>{{invoice_seller_address[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Seller nip</h2>
+                    <h2>{{invoice_seller_nip[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_seller_nip}}</p>
+                    <p>{{invoice_seller_nip[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Buyer name</h2>
+                    <h2>{{invoice_buyer_name[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_buyer_name}}</p>
+                    <p>{{invoice_buyer_name[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray">
-                    <h2>Buyer address</h2>
+                    <h2>{{invoice_buyer_address[1]}}</h2>
                 </div>
                 <div class="field">
-                    <p>{{invoice_buyer_address}}</p>
+                    <p>{{invoice_buyer_address[0]}}</p>
                 </div>
             </div>
 
             <div class="fields-container--horizonal">
                 <div class="field--gray field--border-bottom">
-                    <h2>Buyer nip</h2>
+                    <h2>{{invoice_buyer_nip[1]}}</h2>
                 </div>
                 <div class="field field--border-bottom">
-                    <p>{{invoice_buyer_nip}}</p>
+                    <p>{{invoice_buyer_nip[0]}}</p>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
             <div class="invoice-specs">
                 <div>
                     <div class="field--gray--columns field--gray--columns__on">
-                        <h2>on</h2>
+                        <h2>lp.</h2>
                     </div>
                     <div class="field--column field--column__on field--border-left field--border-bottom">
                         <p>1</p>
@@ -126,46 +126,46 @@
                 </div>
                 <div>
                     <div class="field--gray--columns field--column__specification field--border-left-none">
-                        <h2>Specification</h2>
+                        <h2>{{invoice_specification[1]}}</h2>
                     </div>
                     <div class="field--column field--column__specification field--border-bottom">
-                        <p>{{invoice_specification}}</p>
+                        <p>{{invoice_specification[0]}}</p>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__classification field--border-left-none ">
-                        <h2>Class</h2>
+                        <h2>{{invoice_classification[1]}}</h2>
                     </div>
                     <div class="field--column field--column__classification  field--border-bottom">
-                        <p>{{invoice_classification}}</p>
+                        <p>{{invoice_classification[0]}}</p>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__unit-measure field--border-left-none">
-                        <h2>Unit m.</h2>
+                        <h2>{{invoice_unit_measure[1]}}</h2>
                     </div>
                     <div class="field--column field--column__unit-measure  field--border-bottom ">
-                        <p>{{invoice_unit_measure}}</p>
+                        <p>{{invoice_unit_measure[0]}}</p>
                     </div>
                 </div>
 
                 <div>
-                    <div class="field--gray--columns field--column__hour-rates field--border-left-none ">
-                        <h2>Hour rate</h2>
+                    <div class="field--gray--columns field--column__horizontal__hour-rates field--border-left-none ">
+                        <h2>{{invoice_hour_rates[1]}}</h2>
                     </div>
-                    <div class="field--column field--column__hour-rates  field--border-bottom">
-                        <p>{{invoice_hour_rates}}</p>
+                    <div class="field--column field--column__horizontal__hour-rates field--border-bottom">
+                        <p>{{invoice_hour_rates[0]}}</p>
                     </div>
                 </div>
 
                 <div>
                     <div class="field--gray--columns field--column__hours-number field--border-left-none ">
-                        <h2>Hour number</h2>
+                        <h2>{{invoice_hours_number[1]}}</h2>
                     </div>
                     <div class="field--column field--column__hours-number  field--border-bottom">
-                        <p></p>
+                        <p>{{invoice_hours_number[0]}}</p>
                     </div>
                 </div>
             </div>
@@ -174,51 +174,51 @@
 
                 <div class="fields-container--horizonal">
                     <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
-                        <h2>Netto</h2>
+                        <h2>{{invoice_netto_value[1]}}</h2>
                     </div>
                     <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
 
-                        <p>{{invoice_netto_value}}</p>
+                        <p>{{invoice_netto_value[0]}}</p>
                     </div>
                 </div>
 
                 <div class="fields-container--horizonal">
                     <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
-                        <h2>VAT value (23%)</h2>
+                        <h2>{{invoice_vat_value[1]}}</h2>
                     </div>
                     <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
 
-                        <p>{{invoice_vat_value}}</p>
+                        <p>{{invoice_vat_value[0]}}</p>
                     </div>
                 </div>
 
                 <div class="fields-container--horizonal">
                     <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
-                        <h2>Netto + VAT</h2>
+                        <h2>{{invoice_brutto_value[1]}}</h2>
                     </div>
                     <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
 
-                        <p>{{invoice_brutto_value}}</p>
+                        <p>{{invoice_brutto_value[0]}}</p>
                     </div>
                 </div>
 
                 <div class="fields-container--horizonal">
                     <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
-                        <h2>Currency</h2>
+                        <h2>{{invoice_currency[1]}}</h2>
                     </div>
                     <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
-                        <p>PLN</p>
+                        <p>{{invoice_currency[0]}}</p>
                     </div>
                 </div>
 
                 <div class="fields-container--horizonal">
                     <div
                         class="field--gray field--column__hour-rates field--border-bottom field--border-top-none field--invoice-value-in-words">
-                        <h2>In words</h2>
+                        <h2>{{invoice_value_in_words[1]}}</h2>
                     </div>
                     <div
                         class="field--bottom field--column__hours-number field--border-bottom field--border-top-none field--invoice-value-in-words">
-                        <p>{{invoice_value_in_words}}</p>
+                        <p>{{invoice_value_in_words[0]}}</p>
                     </div>
                 </div>
 

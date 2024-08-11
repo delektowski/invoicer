@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from typing import Annotated
 from count_invoice import InvoiceCounter
 from db.invoices_db import get_invoice, handle_table_creation, insert_invoice
+from enums.invoice_fields import InvoiceFields
 from number_to_word import number_to_word
 from pdf_creator import PdfCreator
 
@@ -19,12 +20,14 @@ templates = Jinja2Templates(directory="templates")
 
 handle_table_creation()
 
+invoice_dict_global = None
 
 @app.get("/")
 async def send_invoice_webpage(request: Request):
     latest_invoice = get_invoice()
+    print("latest_invoice", latest_invoice)
     return templates.TemplateResponse(
-        request=request, name="invoice_form.html", context=latest_invoice
+        request=request, name="invoice_form.jinja", context={"latest_invoice": latest_invoice, "invoice_fields": InvoiceFields}
     )
 
 
@@ -50,70 +53,94 @@ async def send_invoice_webpage(request: Request):
     invoice_counter = InvoiceCounter(invoice_hour_rates, invoice_hours_number)
     invoice_dict = {
         "invoice_top_section": {
-            "invoice_number": (invoice_number, "invoice_number"),
-            "invoice_date": (invoice_date, "invoice_date"),
-            "invoice_pay_date": (invoice_pay_date, "invoice_pay_date"),
-            "invoice_pay_type": (invoice_pay_type, "invoice_pay_type"),
+            "invoice_number": (invoice_number, InvoiceFields.invoice_number.value),
+            "invoice_date": (invoice_date, InvoiceFields.invoice_date.value),
+            "invoice_pay_date": (
+                invoice_pay_date,
+                InvoiceFields.invoice_pay_date.value,
+            ),
+            "invoice_pay_type": (
+                invoice_pay_type,
+                InvoiceFields.invoice_pay_type.value,
+            ),
             "invoice_account_number": (
                 invoice_account_number,
-                "invoice_account_number",
+                InvoiceFields.invoice_account_number.value,
             ),
         },
         "invoice_middle_section": {
-            "invoice_seller_name": (invoice_seller_name, "invoice_seller_name"),
+            "invoice_seller_name": (
+                invoice_seller_name,
+                InvoiceFields.invoice_seller_name.value,
+            ),
             "invoice_seller_address": (
                 invoice_seller_address,
-                "invoice_seller_address",
+                InvoiceFields.invoice_seller_address.value,
             ),
-            "invoice_seller_nip": (invoice_seller_nip, "invoice_seller_nip"),
-            "invoice_buyer_name": (invoice_buyer_name, "invoice_buyer_name"),
-            "invoice_buyer_address": (invoice_buyer_address, "invoice_buyer_address"),
-            "invoice_buyer_nip": (invoice_buyer_nip, "invoice_buyer_nip"),
+            "invoice_seller_nip": (
+                invoice_seller_nip,
+                InvoiceFields.invoice_seller_nip.value,
+            ),
+            "invoice_buyer_name": (
+                invoice_buyer_name,
+                InvoiceFields.invoice_buyer_name.value,
+            ),
+            "invoice_buyer_address": (
+                invoice_buyer_address,
+                InvoiceFields.invoice_buyer_address.value,
+            ),
+            "invoice_buyer_nip": (
+                invoice_buyer_nip,
+                InvoiceFields.invoice_buyer_nip.value,
+            ),
         },
         "invoice_horizontal_section": {
             "invoice_specification": (
                 invoice_specification,
-                "invoice_specification",
+                InvoiceFields.invoice_specification.value,
                 "specification",
             ),
             "invoice_classification": (
                 invoice_classification,
-                "invoice_classification",
+                InvoiceFields.invoice_classification.value,
                 "classification",
             ),
             "invoice_unit_measure": (
                 invoice_unit_measure,
-                "invoice_unit_measure",
+                InvoiceFields.invoice_unit_measure.value,
                 "unit-measure",
             ),
             "invoice_hour_rates": (
                 invoice_hour_rates,
-                "invoice_hour_rates",
-                "hour-rates",
+                InvoiceFields.invoice_hour_rates.value,
+                "horizontal__hour-rates",
             ),
             "invoice_hours_number": (
                 invoice_hours_number,
-                "invoice_hours_number",
+                InvoiceFields.invoice_hours_number.value,
                 "hours-number",
             ),
         },
         "invoice_bottom_section": {
             "invoice_netto_value": (
                 invoice_counter.get_netto_value(),
-                "invoice_netto_value",
+                InvoiceFields.invoice_netto_value.value,
             ),
-            "invoice_vat_value": (invoice_counter.get_vat_value(), "invoice_vat_value"),
+            "invoice_vat_value": (
+                invoice_counter.get_vat_value(),
+                InvoiceFields.invoice_vat_value.value,
+            ),
             "invoice_brutto_value": (
                 invoice_counter.get_brutto_value(),
-                "invoice_brutto_value",
+                InvoiceFields.invoice_brutto_value.value,
             ),
             "invoice_currency": (
                 "PLN",
-                "invoice_currency",
+                InvoiceFields.invoice_currency.value,
             ),
             "invoice_value_in_words": (
                 number_to_word(float(invoice_counter.get_brutto_value())),
-                "invoice_value_in_words",
+                InvoiceFields.invoice_value_in_words.value,
             ),
         },
     }
@@ -127,6 +154,7 @@ async def send_invoice_webpage(request: Request):
 
 @app.get("/invoice-pdf")
 async def send_invoice_webpage(request: Request):
+    global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
     invoice_pay_date = request.query_params.get("invoice_pay_date")
@@ -145,35 +173,85 @@ async def send_invoice_webpage(request: Request):
     invoice_hours_number = request.query_params.get("invoice_hours_number")
 
     invoice_counter = InvoiceCounter(invoice_hour_rates, invoice_hours_number)
-    invoice_dict = {
-        "invoice_number": invoice_number,
-        "invoice_date": invoice_date,
-        "invoice_pay_date": invoice_pay_date,
-        "invoice_pay_type": invoice_pay_type,
-        "invoice_account_number": invoice_account_number,
-        "invoice_seller_name": invoice_seller_name,
-        "invoice_seller_address": invoice_seller_address,
-        "invoice_seller_nip": invoice_seller_nip,
-        "invoice_buyer_name": invoice_buyer_name,
-        "invoice_buyer_address": invoice_buyer_address,
-        "invoice_buyer_nip": invoice_buyer_nip,
-        "invoice_specification": invoice_specification,
-        "invoice_classification": invoice_classification,
-        "invoice_unit_measure": invoice_unit_measure,
-        "invoice_unit_measure": invoice_unit_measure,
-        "invoice_unit_measure": invoice_unit_measure,
-        "invoice_hour_rates": invoice_hour_rates,
-        "invoice_hours_number": invoice_hours_number,
-        "invoice_netto_value": invoice_counter.get_netto_value(),
-        "invoice_vat_value": invoice_counter.get_vat_value(),
-        "invoice_brutto_value": invoice_counter.get_brutto_value(),
-        "invoice_value_in_words": number_to_word(
-            float(invoice_counter.get_brutto_value())
+    invoice_dict_global = {
+        "invoice_number": (invoice_number, InvoiceFields.invoice_number.value),
+        "invoice_date": (invoice_date, InvoiceFields.invoice_date.value),
+        "invoice_pay_date": (invoice_pay_date, InvoiceFields.invoice_pay_date.value),
+        "invoice_pay_type": (invoice_pay_type, InvoiceFields.invoice_pay_type.value),
+        "invoice_account_number": (
+            invoice_account_number,
+            InvoiceFields.invoice_account_number.value,
+        ),
+        "invoice_seller_name": (
+            invoice_seller_name,
+            InvoiceFields.invoice_seller_name.value,
+        ),
+        "invoice_seller_address": (
+            invoice_seller_address,
+            InvoiceFields.invoice_seller_address.value,
+        ),
+        "invoice_seller_nip": (
+            invoice_seller_nip,
+            InvoiceFields.invoice_seller_nip.value,
+        ),
+        "invoice_buyer_name": (
+            invoice_buyer_name,
+            InvoiceFields.invoice_buyer_name.value,
+        ),
+        "invoice_buyer_address": (
+            invoice_buyer_address,
+            InvoiceFields.invoice_buyer_address.value,
+        ),
+        "invoice_buyer_nip": (
+            invoice_buyer_nip,
+            InvoiceFields.invoice_buyer_nip.value,
+        ),
+        "invoice_specification": (
+            invoice_specification,
+            InvoiceFields.invoice_specification.value,
+        ),
+        "invoice_classification": (
+            invoice_classification,
+            InvoiceFields.invoice_classification.value,
+        ),
+        "invoice_unit_measure": (
+            invoice_unit_measure,
+            InvoiceFields.invoice_unit_measure.value,
+        ),
+        "invoice_hour_rates": (
+            invoice_hour_rates,
+            InvoiceFields.invoice_hour_rates.value,
+        ),
+        "invoice_hours_number": (
+            invoice_hours_number,
+            InvoiceFields.invoice_hours_number.value,
+        ),
+        "invoice_netto_value": (
+            invoice_counter.get_netto_value(),
+            InvoiceFields.invoice_netto_value.value,
+        ),
+        "invoice_vat_value": (
+            invoice_counter.get_vat_value(),
+            InvoiceFields.invoice_vat_value.value,
+        ),
+        "invoice_brutto_value": (
+            invoice_counter.get_brutto_value(),
+            InvoiceFields.invoice_brutto_value.value,
+        ),
+         "invoice_currency": (
+                "PLN",
+                InvoiceFields.invoice_currency.value,
+            ),
+        "invoice_value_in_words": (
+            (
+                number_to_word(float(invoice_counter.get_brutto_value())),
+                InvoiceFields.invoice_value_in_words.value,
+            )
         ),
     }
 
     return templates.TemplateResponse(
-        request=request, name="invoice_pdf.html", context=invoice_dict
+        request=request, name="invoice_pdf.html", context=invoice_dict_global
     )
 
 
