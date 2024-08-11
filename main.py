@@ -148,7 +148,7 @@ async def send_invoice_webpage(request: Request):
     return templates.TemplateResponse(
         request=request,
         name="invoice_page.jinja",
-        context={"invoice_dict": invoice_dict},
+        context={"invoice_dict": invoice_dict,"invoice_fields": InvoiceFields},
     )
 
 

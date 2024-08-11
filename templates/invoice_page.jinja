@@ -31,6 +31,15 @@
                 <div class="field field--border-bottom">
                     <p>{{value[0]}}</p>
                 </div>
+
+                {% elif key == 'invoice_number'%}
+                 <div class="field--gray field--large">
+                    <h2 class="field-invoice--bold">{{value[1]}}</h2>
+                </div>
+                <div class="field field--large">
+                    <p class="field-invoice--bold">{{value[0]}}</p>
+                </div>
+
                 {% else %}
                 <div class="field--gray">
                     <h2>{{value[1]}}</h2>

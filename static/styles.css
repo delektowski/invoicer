@@ -73,6 +73,16 @@ h2 {
     -webkit-box-align: center;
 }
 
+.field--large {
+    height: 70px;
+}
+
+.field-invoice--bold {
+    font-weight: 500;
+    font-size: 24px;
+    
+}
+
 .field--bottom {
     display: -webkit-box;
     align-items: center;

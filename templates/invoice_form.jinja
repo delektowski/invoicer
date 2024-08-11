@@ -13,11 +13,11 @@
         <form action="/form/" method="post">
 
             <div class="fields-container--horizonal fields-container--padding-left">
-                <div class="field--gray">
+                <div class="field--gray field--large">
                     <h2 class="field-invoice--bold">{{invoice_fields.invoice_number.value}}</h2>
                 </div>
-                <div class="field">
-                    <input type="text" id="invoice-number" name="invoice_number" placeholder="invoice number"
+                <div class="field field--large">
+                    <input class="field-invoice--bold" type="text" id="invoice-number" name="invoice_number" placeholder="invoice number"
                         value="{{latest_invoice["invoice_number"]}}">
                 </div>
             </div>
