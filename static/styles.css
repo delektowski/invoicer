@@ -170,13 +170,6 @@ h2 {
     border-left: none;
 }
 
-.field--gray--columns>h2,
-.field--gray>h2 {
-    /* font-size: 16px;
-    font-weight: 300;
-    margin: 0; */
-}
-
 .fields-container--vertical {
     padding-right: 1px;
 }
@@ -256,4 +249,26 @@ textarea {
     display: flex;
     -webkit-box-pack: center;
     justify-content: center;
+}
+
+.container--button--create-pdf {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.button--create-pdf {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #18181a;
+  color: #18181a;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 15px;
+  padding: 18px 18px 17px;
+  text-decoration: none;
+  cursor: pointer;
+  background: #fff;
+ 
+  margin-top: 24px;
 }
