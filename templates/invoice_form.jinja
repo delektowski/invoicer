@@ -145,7 +145,6 @@
                             placeholder="Invoice specification">{{latest_invoice["invoice_specification"]}}</textarea>
                     </div>
                 </div>
-
                 <div>
                     <div class="field--gray--columns field--column__classification field--border-left-none ">
                         <h2>{{invoice_fields.invoice_classification.value}}</h2>
@@ -165,7 +164,6 @@
                             placeholder="Invoice unit measure" value="{{latest_invoice["invoice_unit_measure"]}}"><br>
                     </div>
                 </div>
-
                 <div>
                     <div class="field--gray--columns field--column__horizontal__hour-rates field--border-left-none ">
                         <h2>{{invoice_fields.invoice_hour_rates.value}}</h2>
@@ -175,7 +173,6 @@
                             placeholder="Invoice hour rates" value="{{latest_invoice["invoice_hour_rates"]}}" min="1" max="999"><br>
                     </div>
                 </div>
-
                 <div>
                     <div class="field--gray--columns field--column__hours-number field--border-left-none ">
                         <h2>{{invoice_fields.invoice_hours_number.value}}</h2>
@@ -185,6 +182,21 @@
                             placeholder="Invoice hours number" value="{{latest_invoice["invoice_hours_number"]}}" min="1" max="999"><br>
                     </div>
                 </div>
+            </div>
+                 <div class="sign-fields-container">
+                <div class="sign-field-container">
+                    <input class="invoice-signature invoice-signature--left" type="text" id="invoice-signature-left" name="invoice_signature_left"
+                        placeholder="podpis" value="{{latest_invoice[' invoice_signature_left']}}"><br>
+                    <p>imię i nazwisko osoby</p>
+                    <p>upoważnionej do wystawienia faktury</p>
+                </div>
+                <div class="sign-field-container">
+                    <input class="invoice-signature invoice-signature--right" type="text" id="invoice-signature-right" name="invoice_signature_right"
+                        placeholder="podpis" value="{{latest_invoice[' invoice_signature_right']}}"><br>
+                    <p>imię i nazwisko osoby</p>
+                    <p>upoważnionej do odbioru faktury</p>
+                </div>
+
             </div>
 
          
