@@ -1,6 +1,6 @@
 invoices.db
 .DS_Store
 __pycache__/
-venv/
+.venv/
 *.pdf
 test.py
