@@ -76,6 +76,6 @@ def get_decimal(number_float: float) -> str:
     decimal = str(round(number_float % 1,2)).replace('0.','')
   
     # adds zero to single number
-    return f"{decimal + '0' if len(decimal) < 2 else decimal}/100"
+    return f"złotych {decimal + '0' if len(decimal) < 2 else decimal}/100"
 
 

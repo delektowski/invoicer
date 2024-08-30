@@ -162,10 +162,10 @@
                 </div>
 
                 <div>
-                    <div class="field--gray--columns field--column__unit-measure field--border-left-none">
+                    <div class="field--gray--columns field--column__unit-measure--wider field--border-left-none">
                         <h2>{{invoice_fields.invoice_unit_measure.value}}</h2>
                     </div>
-                    <div class="field--column field--column__unit-measure  field--border-bottom ">
+                    <div class="field--column field--column__unit-measure--wider  field--border-bottom ">
                         <input type="text" id="invoice-unit-measure" name="invoice_unit_measure"
                             placeholder="Invoice unit measure" value="{{latest_invoice["invoice_unit_measure"]}}"><br>
                     </div>
@@ -206,7 +206,7 @@
 
             </div>
 
-         <div class="container--button--create-pdf container--button--create-pdf-bottom">
+         <div class="container--button--create-pdf ">
                 <button type="submit" class="button--create-pdf">Stwórz PDF</button>
             </div>
             

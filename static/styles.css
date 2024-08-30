@@ -127,6 +127,10 @@ h2 {
     width: 30px;
 }
 
+.field--column__unit-measure--wider {
+    width: 39px;
+}
+
 .field--column__bottom-section {
     width: 80px;
 }
