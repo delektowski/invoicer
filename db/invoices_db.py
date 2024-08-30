@@ -30,6 +30,8 @@ def create_table(table_name):
         invoice_unit_measure TEXT,
         invoice_hour_rates INTEGER,
         invoice_hours_number INTEGER
+        invoice_signature_left TEXT
+        invoice_signature_right TEXT
     );
     """.format(
         table_name
@@ -48,8 +50,8 @@ def insert_invoice(table_name, data):
         invoice_seller_name, invoice_seller_address, invoice_seller_nip,
         invoice_buyer_name, invoice_buyer_address, invoice_buyer_nip,
         invoice_specification, invoice_classification, invoice_unit_measure,
-        invoice_hour_rates, invoice_hours_number
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        invoice_hour_rates, invoice_hours_number, invoice_signature_left, invoice_signature_right
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
     """.format(
         table_name
     )

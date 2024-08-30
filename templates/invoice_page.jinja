@@ -10,9 +10,9 @@
 
 <body>
     <div class="invoice-confirmation">
-        <p>Invoice has been created!</p>
+        <h3>Faktura została utworzona.</h3>
         <form action="/file" method="get">
-            <button type="submit">Download pdf</button>
+            <button class="button--create-pdf" type="submit">Pobierz PDF</button>
         </form>
     </div>
 
@@ -148,6 +148,23 @@
             </div>
             {% endif %}
             {% endfor %}
+               <div class="sign-fields-container">
+                <div class="sign-field-container">
+                    <p class="invoice-signed">{{invoice_dict["invoice_signature_left"]}}</p>
+                    <p>imię i nazwisko osoby</p>
+                    <p>upoważnionej do wystawienia faktury</p>
+                </div>
+                <div class="sign-field-container">
+                     <p class="invoice-signed">{{invoice_dict["invoice_signature_right"]}}</p>
+                    <p>imię i nazwisko osoby</p>
+                    <p>upoważnionej do odbioru faktury</p>
+                </div>
+        </form>
+    </div>
+    
+    <div class="invoice-confirmation">
+        <form action="/file" method="get">
+            <button class="button--create-pdf" type="submit">Pobierz PDF</button>
         </form>
     </div>
 </body>

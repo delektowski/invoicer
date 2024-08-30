@@ -5,9 +5,9 @@ class PdfCreator:
     # Configure PDF options
     options = {
         "page-size": "A4",
-        "margin-top": "20mm",
+        "margin-top": "10mm",
         "margin-right": "20mm",
-        "margin-bottom": "20mm",
+        "margin-bottom": "10mm",
         "margin-left": "20mm",
     }
 

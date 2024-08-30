@@ -15,6 +15,8 @@ initial_invoice = (
     "",
     0,
     0,
+    "",
+    "",
 )
 
 def db_response_to_dict(cur, resp_values):

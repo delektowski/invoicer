@@ -9,9 +9,15 @@
 </head>
 
 <body>
+ 
     <div class="container">
         <form action="/form/" method="post">
-
+            <div class="invoice-confirmation ">
+            
+            <div class="container--button--create-pdf">
+                <button type="submit" class="button--create-pdf">Stwórz PDF</button>
+            </div>
+            </div>
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray field--large">
                     <h2 class="field-invoice--bold">{{invoice_fields.invoice_number.value}}</h2>
@@ -185,25 +191,25 @@
             </div>
                  <div class="sign-fields-container">
                 <div class="sign-field-container">
-                    <input class="invoice-signature invoice-signature--left" type="text" id="invoice-signature-left" name="invoice_signature_left"
-                        placeholder="podpis" value="{{latest_invoice[' invoice_signature_left']}}"><br>
+                    <input class="invoice-signature invoice-signature--left invoice-signed" type="text" id="invoice-signature-left" name="invoice_signature_left"
+                        placeholder="podpis" value="{{latest_invoice["invoice_signature_left"]}}"><br>
                     <p>imię i nazwisko osoby</p>
                     <p>upoważnionej do wystawienia faktury</p>
                 </div>
                 <div class="sign-field-container">
-                    <input class="invoice-signature invoice-signature--right" type="text" id="invoice-signature-right" name="invoice_signature_right"
-                        placeholder="podpis" value="{{latest_invoice[' invoice_signature_right']}}"><br>
+                    <input class="invoice-signature invoice-signature--right invoice-signed" type="text" id="invoice-signature-right" name="invoice_signature_right"
+                        placeholder="podpis" value="{{latest_invoice["invoice_signature_right"]}}">
+                        <br>
                     <p>imię i nazwisko osoby</p>
                     <p>upoważnionej do odbioru faktury</p>
                 </div>
 
             </div>
 
-         
-                <div class="container--button--create-pdf">
-
+         <div class="container--button--create-pdf container--button--create-pdf-bottom">
                 <button type="submit" class="button--create-pdf">Stwórz PDF</button>
             </div>
+            
         </form>
     </div>
 </body>

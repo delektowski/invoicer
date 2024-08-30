@@ -49,6 +49,8 @@ async def send_invoice_webpage(request: Request):
     invoice_unit_measure = request.query_params.get("invoice_unit_measure")
     invoice_hour_rates = request.query_params.get("invoice_hour_rates")
     invoice_hours_number = request.query_params.get("invoice_hours_number")
+    invoice_signature_left = request.query_params.get("invoice_signature_left")
+    invoice_signature_right = request.query_params.get("invoice_signature_right")
 
     invoice_counter = InvoiceCounter(invoice_hour_rates, invoice_hours_number)
     invoice_dict = {
@@ -143,6 +145,8 @@ async def send_invoice_webpage(request: Request):
                 InvoiceFields.invoice_value_in_words.value,
             ),
         },
+        "invoice_signature_left": invoice_signature_left,
+        "invoice_signature_right": invoice_signature_right,
     }
 
     return templates.TemplateResponse(
@@ -171,6 +175,8 @@ async def send_invoice_webpage(request: Request):
     invoice_unit_measure = request.query_params.get("invoice_unit_measure")
     invoice_hour_rates = request.query_params.get("invoice_hour_rates")
     invoice_hours_number = request.query_params.get("invoice_hours_number")
+    invoice_signature_left = request.query_params.get("invoice_signature_left")
+    invoice_signature_right = request.query_params.get("invoice_signature_right")
 
     invoice_counter = InvoiceCounter(invoice_hour_rates, invoice_hours_number)
     invoice_dict_global = {
@@ -248,6 +254,12 @@ async def send_invoice_webpage(request: Request):
                 InvoiceFields.invoice_value_in_words.value,
             )
         ),
+        "invoice_signature_left": (
+            invoice_signature_left
+        ),
+        "invoice_signature_right": (
+            invoice_signature_right
+        ),
     }
 
     return templates.TemplateResponse(
@@ -282,6 +294,8 @@ def get_form(
     invoice_unit_measure: Annotated[str, Form()],
     invoice_hour_rates: Annotated[str, Form()],
     invoice_hours_number: Annotated[str, Form()],
+    invoice_signature_left: Annotated[str, Form()],
+    invoice_signature_right: Annotated[str, Form()],
 ):
 
     invoice_dict = {
@@ -303,6 +317,8 @@ def get_form(
         "invoice_unit_measure": invoice_unit_measure,
         "invoice_hour_rates": invoice_hour_rates,
         "invoice_hours_number": invoice_hours_number,
+        "invoice_signature_left": invoice_signature_left,
+        "invoice_signature_right": invoice_signature_right,
     }
 
     redirect_url = "/invoice?" + "&".join(
@@ -326,6 +342,8 @@ def get_form(
             "invoice_unit_measure": invoice_unit_measure,
             "invoice_hour_rates": invoice_hour_rates,
             "invoice_hours_number": invoice_hours_number,
+            "invoice_signature_left": invoice_signature_left,
+            "invoice_signature_right": invoice_signature_right,
         }.items()
     )
 
@@ -350,6 +368,8 @@ def get_form(
             "invoice_unit_measure": invoice_unit_measure,
             "invoice_hour_rates": invoice_hour_rates,
             "invoice_hours_number": invoice_hours_number,
+            "invoice_signature_left": invoice_signature_left,
+            "invoice_signature_right": invoice_signature_right,
         }.items()
     )
 

@@ -12,9 +12,14 @@ h2 {
 
 .container {
     max-width: 785px;
-
     padding-block: 50px;
+    padding-inline: 50px;
     margin: 20px auto;
+    background-color: whitesmoke;
+}
+
+.container--bg-white {
+    background-color: #fff;
 }
 
 input {
@@ -27,7 +32,6 @@ input {
     outline: none;
     width: 100%;
 }
-
 
 h2 {
     /* text-overflow: ellipsis; */
@@ -253,10 +257,25 @@ textarea {
     position: relative;
 }
 
+.sign-field-container-pdf {
+    width: 200px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.sign-field-container-pdf:last-child {
+  margin-left: 235px;
+}
+
 .invoice-signature {
-    margin: 0;
+    margin: 0 0 10px 0;
     position: absolute;
     bottom: 30px;
+}
+
+.invoice-signed {
+    font-weight: bold;  
+    margin-bottom: 10px;
 }
 
 .invoice-signature--left {
@@ -268,11 +287,11 @@ textarea {
 }
 
 .invoice-confirmation {
-    padding: 20px 100px;
+    padding: 10px 100px;
     margin: 2vh auto;
     background-color: whitesmoke;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 20px 1fr;
     align-items: center;
     justify-items: center;
 }
@@ -288,10 +307,14 @@ textarea {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
+}
+
+.container--button--create-pdf-bottom {
+    margin-bottom:0;
 }
 
 .button--create-pdf {
-    position: relative;
     overflow: hidden;
     border: 1px solid #18181a;
     color: #18181a;
