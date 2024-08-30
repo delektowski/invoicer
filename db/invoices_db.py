@@ -29,8 +29,8 @@ def create_table(table_name):
         invoice_classification TEXT,
         invoice_unit_measure TEXT,
         invoice_hour_rates INTEGER,
-        invoice_hours_number INTEGER
-        invoice_signature_left TEXT
+        invoice_hours_number INTEGER,
+        invoice_signature_left TEXT,
         invoice_signature_right TEXT
     );
     """.format(
