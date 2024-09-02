@@ -5,6 +5,8 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Annotated
+
+from starlette.templating import _TemplateResponse
 from count_invoice import InvoiceCounter
 from db.invoices_db import get_invoice, handle_table_creation, insert_invoice
 from enums.invoice_fields import InvoiceFields
@@ -23,7 +25,7 @@ handle_table_creation()
 invoice_dict_global = None
 
 @app.get("/")
-async def send_invoice_webpage(request: Request):
+async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     latest_invoice = get_invoice()
     print("latest_invoice", latest_invoice)
     return templates.TemplateResponse(
@@ -32,7 +34,7 @@ async def send_invoice_webpage(request: Request):
 
 
 @app.get("/invoice")
-async def send_invoice_webpage(request: Request):
+async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
     invoice_pay_date = request.query_params.get("invoice_pay_date")
@@ -157,7 +159,7 @@ async def send_invoice_webpage(request: Request):
 
 
 @app.get("/invoice-pdf")
-async def send_invoice_webpage(request: Request):
+async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
@@ -268,7 +270,7 @@ async def send_invoice_webpage(request: Request):
 
 
 @app.get("/file")
-def send_file(request: Request):
+def send_file(request: Request) -> FileResponse:
     invoice_file_path = "./output3.pdf"
     custom_filename = "output3.pdf"
 
@@ -296,7 +298,7 @@ def get_form(
     invoice_hours_number: Annotated[str, Form()],
     invoice_signature_left: Annotated[str, Form()],
     invoice_signature_right: Annotated[str, Form()],
-):
+) -> RedirectResponse:
 
     invoice_dict = {
         "invoice_number": invoice_number,
