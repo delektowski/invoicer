@@ -1,14 +1,25 @@
 import sqlite3
+import os
 
-from db.helper import db_response_to_dict, initial_invoice
+from .helper import db_response_to_dict, initial_invoice
 
+# Add this at the top of the file, after imports
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DB_DIR = os.path.join(BASE_DIR, 'db')
+DB_PATH = os.path.join(DB_DIR, 'invoices.db')
 
+def ensure_db_directory():
+    if not os.path.exists(DB_DIR):
+        os.makedirs(DB_DIR)
 
+def connect_db():
+    ensure_db_directory()
+    return sqlite3.connect(DB_PATH)
 
-
+# Update all functions to use connect_db() instead of sqlite3.connect(DB_PATH)
 
 def create_table(table_name):
-    conn = sqlite3.connect("./db/invoices.db")
+    conn = connect_db()
     cur = conn.cursor()
 
     create_table_query = """
@@ -42,7 +53,7 @@ def create_table(table_name):
 
 
 def insert_invoice(table_name, data):
-    conn = sqlite3.connect("./db/invoices.db")
+    conn = connect_db()
     cur = conn.cursor()
     insert_data_query = """
     INSERT INTO {} (
@@ -64,7 +75,7 @@ def insert_invoice(table_name, data):
 
 
 def is_table_exist(table_name):
-    conn = sqlite3.connect("./db/invoices.db")
+    conn = connect_db()
     cur = conn.cursor()
     check_table_exist_query = """
     SELECT name FROM sqlite_master WHERE type='table' AND name=?;
@@ -76,7 +87,7 @@ def is_table_exist(table_name):
 
 
 def get_invoice():
-    conn = sqlite3.connect("./db/invoices.db")
+    conn = connect_db()
     cur = conn.cursor()
     if is_table_exist("invoices"):
         query = """

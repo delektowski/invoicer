@@ -1,31 +1,39 @@
-from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import FileResponse
-from fastapi.staticfiles import StaticFiles
-from pydantic import BaseModel
+import os
 from typing import Annotated
-
+from fastapi import Form, Request, APIRouter
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse, RedirectResponse
 from starlette.templating import _TemplateResponse
-from count_invoice import InvoiceCounter
-from db.invoices_db import get_invoice, handle_table_creation, insert_invoice
-from enums.invoice_fields import InvoiceFields
-from number_to_word import number_to_word
-from pdf_creator import PdfCreator
+from app.models.invoice_fields import InvoiceFields
+from app.services.number_to_word import number_to_word  # Correct import
+from app.services.invoice_calculator import InvoiceCounter
+from app.services.pdf_creator import PdfCreator
+
+from ...db.invoices_db import get_invoice, insert_invoice
 
 
-app = FastAPI()
+from fastapi import APIRouter, Request
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
+import os
+from pathlib import Path
 
-templates = Jinja2Templates(directory="templates")
+current_dir = Path(__file__).resolve().parent
+project_root = current_dir.parent.parent
 
-handle_table_creation()
+templates_dir = project_root / "templates"
+print("templates_dir", templates_dir)
+templates = Jinja2Templates(directory=str(templates_dir))
+
+router = APIRouter()
+
+
+
 
 invoice_dict_global = None
 
-@app.get("/")
+@router.get("/")
 async def send_invoice_webpage(request: Request) -> _TemplateResponse:
+  
     latest_invoice = get_invoice()
     print("latest_invoice", latest_invoice)
     return templates.TemplateResponse(
@@ -33,7 +41,7 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     )
 
 
-@app.get("/invoice")
+@router.get("/invoice")
 async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
@@ -158,7 +166,7 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     )
 
 
-@app.get("/invoice-pdf")
+@router.get("/invoice-pdf")
 async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
@@ -269,15 +277,14 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     )
 
 
-@app.get("/file")
+@router.get("/file")
 def send_file(request: Request) -> FileResponse:
     invoice_file_path = "./output3.pdf"
     custom_filename = "output3.pdf"
 
     return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
 
-
-@app.post("/form", status_code=201)
+@router.post("/form", status_code=201)
 def get_form(
     request: Request,
     invoice_number: Annotated[str, Form()],
@@ -349,7 +356,7 @@ def get_form(
         }.items()
     )
 
-    url_pdf = "invoice-pdf?" + "&".join(
+    url_pdf = "http://localhost:8000/invoice-pdf?" + "&".join(
         f"{key}={value}"
         for key, value in {
             "invoice_number": invoice_number,
@@ -375,9 +382,16 @@ def get_form(
         }.items()
     )
 
+    print(f"Attempting to create PDF from URL: {url_pdf}")  # Debug print
+
+    try:
+        pdf_creator = PdfCreator(url_pdf)
+        pdf_creator.create_pdf()
+    except Exception as e:
+        print(f"Error creating PDF: {str(e)}")
+        # Handle the error appropriately
+
     insert_invoice(table_name="invoices", data=tuple(invoice_dict.values()))
-    pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
-    pdf_creator.create_pdf()
 
     response = RedirectResponse(url=redirect_url, status_code=301)
 
