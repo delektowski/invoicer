@@ -356,7 +356,7 @@ def get_form(
         }.items()
     )
 
-    url_pdf = "http://localhost:8000/invoice-pdf?" + "&".join(
+    url_pdf = "invoice-pdf?" + "&".join(
         f"{key}={value}"
         for key, value in {
             "invoice_number": invoice_number,
