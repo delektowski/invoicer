@@ -385,7 +385,7 @@ def get_form(
     print(f"Attempting to create PDF from URL: {url_pdf}")  # Debug print
 
     try:
-        pdf_creator = PdfCreator(url_pdf)
+        pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
         pdf_creator.create_pdf()
     except Exception as e:
         print(f"Error creating PDF: {str(e)}")
