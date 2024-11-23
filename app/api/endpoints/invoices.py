@@ -1,6 +1,8 @@
 import os
 from typing import Annotated
-from fastapi import Form, Request, APIRouter
+from app.auth.dependencies import get_current_active_user, verify_token
+from app.auth.models import User
+from fastapi import Form, Request, APIRouter,Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, RedirectResponse
 from starlette.templating import _TemplateResponse
@@ -21,7 +23,6 @@ current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
 
 templates_dir = project_root / "templates"
-print("templates_dir", templates_dir)
 templates = Jinja2Templates(directory=str(templates_dir))
 
 router = APIRouter()
@@ -31,9 +32,11 @@ router = APIRouter()
 
 invoice_dict_global = None
 
+
 @router.get("/")
-async def send_invoice_webpage(request: Request) -> _TemplateResponse:
-  
+async def send_invoice_webpage(request: Request, current_user: User = Depends(verify_token)) -> _TemplateResponse:
+
+    
     latest_invoice = get_invoice()
     print("latest_invoice", latest_invoice)
     return templates.TemplateResponse(
@@ -273,7 +276,7 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     }
 
     return templates.TemplateResponse(
-        request=request, name="invoice_pdf.html", context=invoice_dict_global
+        request=request, name="invoice_pdf.jinja", context=invoice_dict_global
     )
 
 
