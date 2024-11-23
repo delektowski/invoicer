@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+    <title>Invoicer</title>
+</head>
+
+<body>
+    <div class="container container--bg-white">
+        <form action="/form/" method="post">
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray field--large">
+                    <h2 class="field-invoice--bold">{{invoice_number[1]}}</h2>
+                </div>
+                <div class="field field--large">
+                    <p class="field-invoice--bold">{{invoice_number[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>{{invoice_date[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_date[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>{{invoice_pay_date[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_pay_date[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray">
+                    <h2>{{invoice_pay_type[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_pay_type[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal fields-container--padding-left">
+                <div class="field--gray field--border-bottom">
+                    <h2>{{invoice_account_number[1]}}</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{invoice_account_number[0]}}</p>
+                </div>
+            </div>
+
+            <div class="horizontal-empty-space"></div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>{{invoice_seller_name[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_name[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>{{invoice_seller_address[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_address[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>{{invoice_seller_nip[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_seller_nip[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>{{invoice_buyer_name[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_buyer_name[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray">
+                    <h2>{{invoice_buyer_address[1]}}</h2>
+                </div>
+                <div class="field">
+                    <p>{{invoice_buyer_address[0]}}</p>
+                </div>
+            </div>
+
+            <div class="fields-container--horizonal">
+                <div class="field--gray field--border-bottom">
+                    <h2>{{invoice_buyer_nip[1]}}</h2>
+                </div>
+                <div class="field field--border-bottom">
+                    <p>{{invoice_buyer_nip[0]}}</p>
+                </div>
+            </div>
+
+            <div class="horizontal-empty-space"></div>
+
+            <div class="invoice-specs">
+                <div>
+                    <div class="field--gray--columns field--gray--columns__on">
+                        <h2>lp.</h2>
+                    </div>
+                    <div class="field--column field--column__on field--border-left field--border-bottom">
+                        <p>1</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="field--gray--columns field--column__specification field--border-left-none">
+                        <h2>{{invoice_specification[1]}}</h2>
+                    </div>
+                    <div class="field--column field--column__specification field--border-bottom">
+                        <p>{{invoice_specification[0]}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__classification field--border-left-none ">
+                        <h2>{{invoice_classification[1]}}</h2>
+                    </div>
+                    <div class="field--column field--column__classification  field--border-bottom">
+                        <p>{{invoice_classification[0]}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__unit-measure field--border-left-none">
+                        <h2>{{invoice_unit_measure[1]}}</h2>
+                    </div>
+                    <div class="field--column field--column__unit-measure  field--border-bottom ">
+                        <p>{{invoice_unit_measure[0]}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__horizontal__hour-rates field--border-left-none ">
+                        <h2>{{invoice_hour_rates[1]}}</h2>
+                    </div>
+                    <div class="field--column field--column__horizontal__hour-rates field--border-bottom">
+                        <p>{{invoice_hour_rates[0]}}</p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field--gray--columns field--column__hours-number field--border-left-none ">
+                        <h2>{{invoice_hours_number[1]}}</h2>
+                    </div>
+                    <div class="field--column field--column__hours-number  field--border-bottom">
+                        <p>{{invoice_hours_number[0]}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fields-container--vertical">
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>{{invoice_netto_value[1]}}</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_netto_value[0]}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>{{invoice_vat_value[1]}}</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_vat_value[0]}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>{{invoice_brutto_value[1]}}</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+
+                        <p>{{invoice_brutto_value[0]}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div class="field--gray field--column__hour-rates field--border-bottom field--border-top-none">
+                        <h2>{{invoice_currency[1]}}</h2>
+                    </div>
+                    <div class="field--bottom field--column__hours-number field--border-bottom field--border-top-none">
+                        <p>{{invoice_currency[0]}}</p>
+                    </div>
+                </div>
+
+                <div class="fields-container--horizonal">
+                    <div
+                        class="field--gray field--column__hour-rates field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <h2>{{invoice_value_in_words[1]}}</h2>
+                    </div>
+                    <div
+                        class="field--bottom field--column__hours-number field--border-bottom field--border-top-none field--invoice-value-in-words">
+                        <p>{{invoice_value_in_words[0]}}</p>
+                    </div>
+                </div>
+
+                <div class="sign-fields-container">
+                    <div class="sign-field-container-pdf">
+                        <p class="invoice-signed">{{invoice_signature_left}}</p>
+                        <p>imię i nazwisko osoby</p>
+                        <p>upoważnionej do wystawienia faktury</p>
+                    </div>
+                    <div class="sign-field-container-pdf">
+                         <p class="invoice-signed">{{invoice_signature_right}}</p>
+                        <p>imię i nazwisko osoby</p>
+                        <p>upoważnionej do odbioru faktury</p>
+                    </div>
+        </form>
+    </div>
+</body>
+
+</html>

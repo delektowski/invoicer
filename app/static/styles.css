@@ -1,0 +1,334 @@
+body,
+input,
+textarea,
+p,
+h2 {
+    box-sizing: border-box;
+    font-family: Helvetica, Arial, sans-serif, monospace;
+    font-weight: 300;
+    margin: 0;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 785px;
+    padding-block: 50px;
+    padding-inline: 50px;
+    margin: 20px auto;
+    background-color: whitesmoke;
+}
+
+.container--bg-white {
+    background-color: #fff;
+}
+
+input {
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    width: 100%;
+}
+
+h2 {
+    /* text-overflow: ellipsis; */
+    overflow: hidden;
+}
+
+.field--gray {
+    display: -webkit-box;
+    -webkit-box-align: center;
+    width: 150px;
+    height: 40px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    border: 1px black solid;
+    background-color: rgb(200, 200, 200);
+    border-bottom: none;
+}
+
+.field--gray--columns {
+    display: -webkit-box;
+    display: flex;
+    align-items: center;
+    -webkit-box-align: center;
+    padding: 0 10px;
+    height: 45px;
+    border: 1px black solid;
+    background-color: rgb(200, 200, 200);
+    border-bottom: none;
+}
+
+.field {
+    display: -webkit-box;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    padding: 0 10px;
+    display: flex;
+    border: 1px black solid;
+    border-bottom: none;
+    border-left: none;
+    align-items: center;
+    -webkit-box-align: center;
+}
+
+.field--large {
+    height: 70px;
+}
+
+.field-invoice--bold {
+    font-weight: 500;
+    font-size: 24px;
+
+}
+
+.field--bottom {
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
+    padding: 0 10px;
+    border: 1px black solid;
+    border-bottom: none;
+    border-left: none;
+}
+
+.field--column {
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    display: flex;
+    height: 80px;
+    padding: 0 10px;
+    border: 1px black solid;
+    border-bottom: none;
+    border-left: none;
+}
+
+
+.field--column__on {
+    width: 20px;
+}
+
+.field--column__specification {
+    width: 300px;
+}
+
+.field--column__classification {
+    width: 50px;
+}
+
+.field--column__unit-measure {
+    width: 30px;
+}
+
+.field--column__unit-measure--wider {
+    width: 39px;
+}
+
+.field--column__bottom-section {
+    width: 80px;
+}
+
+.field--column__hour-rates {
+    width: 80px;
+    height: 55px;
+    word-wrap: break-all;
+}
+
+.field--column__horizontal__hour-rates {
+    width: 80px;
+}
+
+.field--column__hours-number {
+    width: 177px;
+}
+
+.field--invoice-value-in-words {
+    height: 177px;
+    word-wrap: break-word;
+}
+
+.field--border-bottom {
+    border-bottom: 1px black solid;
+}
+
+.field--border-top {
+    border-top: 1px black solid;
+}
+
+.field--border-top-none {
+    border-top: none;
+}
+
+.field--border-bottom-none {
+    border-bottom: none;
+}
+
+.field--border-left {
+    border-left: 1px black solid;
+}
+
+.field--border-left-none {
+    border-left: none;
+}
+
+.fields-container--vertical {
+    padding-right: 1px;
+}
+
+.fields-container--horizonal {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.fields-container--horizonal-bottom {
+    border-right: 1px black solid;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: end;
+    justify-content: flex-end;
+}
+
+.fields-container--columns {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+.fields-container--padding-left {
+    padding-left: 320px;
+}
+
+.invoice-specs {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: start;
+    justify-content: start;
+}
+
+.horizontal-empty-space {
+    width: 100%;
+    height: 40px;
+}
+
+textarea {
+    border: none;
+    background-image: none;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none;
+    width: 100%;
+    resize: none;
+}
+
+.fields-container>button {
+    -webkit-box-align: center;
+    align-self: center;
+    margin-top: 10px;
+    width: 100px;
+    height: 40px;
+    background-color: rgba(245, 245, 245, 0.753);
+}
+
+.sign-fields-container {
+    margin-top: 40px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: space-between;
+    justify-content: space-between;
+}
+
+.sign-field-container {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    position: relative;
+}
+
+.sign-field-container-pdf {
+    width: 200px;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.sign-field-container-pdf:last-child {
+  margin-left: 235px;
+}
+
+.invoice-signature {
+    margin: 0 0 10px 0;
+    position: absolute;
+    bottom: 30px;
+}
+
+.invoice-signed {
+    font-weight: bold;  
+    margin-bottom: 10px;
+}
+
+.invoice-signature--left {
+    left: 45px;
+}
+
+.invoice-signature--right {
+    left: 32px;
+}
+
+.invoice-confirmation {
+    padding: 10px 100px;
+    margin: 2vh auto;
+    background-color: whitesmoke;
+    display: grid;
+    grid-template-rows: 20px 1fr;
+    align-items: center;
+    justify-items: center;
+}
+
+.button-container {
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.container--button--create-pdf {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.container--button--create-pdf-bottom {
+    margin-bottom:0;
+}
+
+.button--create-pdf {
+    overflow: hidden;
+    border: 1px solid #18181a;
+    color: #18181a;
+    display: inline-block;
+    font-size: 15px;
+    line-height: 15px;
+    padding: 18px 18px 17px;
+    text-decoration: none;
+    cursor: pointer;
+    background: #fff;
+
+    margin-top: 24px;
+}
