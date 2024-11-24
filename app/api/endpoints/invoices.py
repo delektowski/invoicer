@@ -34,18 +34,15 @@ invoice_dict_global = None
 
 
 @router.get("/")
-async def send_invoice_webpage(request: Request, current_user: User = Depends(verify_token)) -> _TemplateResponse:
-
-    
+async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
     latest_invoice = get_invoice()
-    print("latest_invoice", latest_invoice)
     return templates.TemplateResponse(
         request=request, name="invoice_form.jinja", context={"latest_invoice": latest_invoice, "invoice_fields": InvoiceFields}
     )
 
 
 @router.get("/invoice")
-async def send_invoice_webpage(request: Request) -> _TemplateResponse:
+async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
     invoice_pay_date = request.query_params.get("invoice_pay_date")
@@ -170,7 +167,7 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
 
 
 @router.get("/invoice-pdf")
-async def send_invoice_webpage(request: Request) -> _TemplateResponse:
+async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
     global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
@@ -281,7 +278,7 @@ async def send_invoice_webpage(request: Request) -> _TemplateResponse:
 
 
 @router.get("/file")
-def send_file(request: Request) -> FileResponse:
+def send_file(request: Request, current_user: User = Depends(get_current_active_user)) -> FileResponse:
     invoice_file_path = "./output3.pdf"
     custom_filename = "output3.pdf"
 
@@ -307,7 +304,7 @@ def get_form(
     invoice_hour_rates: Annotated[str, Form()],
     invoice_hours_number: Annotated[str, Form()],
     invoice_signature_left: Annotated[str, Form()],
-    invoice_signature_right: Annotated[str, Form()],
+    invoice_signature_right: Annotated[str, Form()], current_user: User = Depends(get_current_active_user)
 ) -> RedirectResponse:
 
     invoice_dict = {

@@ -13,12 +13,6 @@ static_dir = os.path.join(current_dir, "static")
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
-app.include_router(auth.router)
-app.include_router(invoices.router)
-
-handle_table_creation()
-
-
 @app.middleware("http")
 async def create_auth_header(
     request: Request,
@@ -43,3 +37,10 @@ async def create_auth_header(
 
     response = await call_next(request)
     return response
+
+app.include_router(auth.router)
+app.include_router(invoices.router)
+
+handle_table_creation()
+
+
