@@ -50,6 +50,8 @@ async def create_auth_header(
         "Authorization" not in request.headers
         and route != "/login"
         and route != "/token"
+        and route != "/static/styles.css"
+        and route != "/invoice-pdf"
     ):
         return RedirectResponse(url="/login")
 
