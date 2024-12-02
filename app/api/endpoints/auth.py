@@ -5,11 +5,11 @@ from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
 
 from fastapi.templating import Jinja2Templates
-from app.auth.models import Token, User
-from app.auth.utils import create_access_token, verify_password
-from app.core.config import settings
-from app.db.fake_db import fake_users_db
-from app.auth.dependencies import get_user
+from auth.models import Token, User
+from auth.utils import create_access_token, verify_password
+from core.config import settings
+from db.fake_db import fake_users_db
+from auth.dependencies import get_user
 from fastapi.responses import RedirectResponse
 
 current_dir = Path(__file__).resolve().parent

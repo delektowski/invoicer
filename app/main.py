@@ -1,12 +1,30 @@
+import logging
 from urllib.request import Request
+from db.database import init_db
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from app.api.endpoints import invoices, auth
-from app.db.invoices_db import handle_table_creation
+from api.endpoints import invoices, auth
 import os
 from fastapi.responses import RedirectResponse
+from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
+from core.config import settings
 
-app = FastAPI()
+
+logger = logging.getLogger(__name__)
+
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting up...")
+    await init_db()
+    yield
+    logger.info("Shutting down...")
+
+app = FastAPI(
+    lifespan=lifespan  # Pass the lifespan context manager
+)
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(current_dir, "static")
@@ -38,9 +56,27 @@ async def create_auth_header(
     response = await call_next(request)
     return response
 
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 app.include_router(auth.router)
 app.include_router(invoices.router)
 
-handle_table_creation()
+# handle_table_creation()
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host=settings.HOST,
+        port=settings.PORT,
+        reload=settings.DEBUG
+    )
 
 

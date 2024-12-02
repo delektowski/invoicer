@@ -17,8 +17,9 @@ class PdfCreator:
         self.website_url = website_url
 
     def create_pdf(self):
+        print(f"Creating PDF from {self.website_url}")
         pdfkit.from_url(self.website_url, self.output_pdf_path, options=self.options)
 
 if __name__ == "__main__":
-    pdf_creator = PdfCreator("http://127.0.0.1:8000")
+    pdf_creator = PdfCreator("http://0.0.0.0:8000/")
     pdf_creator.create_pdf()

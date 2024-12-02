@@ -1,23 +1,22 @@
-import os
+from datetime import datetime
 from typing import Annotated
-from app.auth.dependencies import get_current_active_user, verify_token
-from app.auth.models import User
-from fastapi import Form, Request, APIRouter,Depends
+
+from db.database import get_db
+from auth.dependencies import get_current_active_user, verify_token
+from auth.models import User
+from fastapi import Form, Request, APIRouter, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, RedirectResponse
 from starlette.templating import _TemplateResponse
-from app.models.invoice_fields import InvoiceFields
-from app.services.number_to_word import number_to_word  # Correct import
-from app.services.invoice_calculator import InvoiceCounter
-from app.services.pdf_creator import PdfCreator
-
-from ...db.invoices_db import get_invoice, insert_invoice
-
+from models.invoice_fields import InvoiceFields
+from services.number_to_word import number_to_word  # Correct import
+from services.invoice_calculator import InvoiceCounter
+from services.pdf_creator import PdfCreator
+from db.invoices_db import create_invoice, get_latest_invoice
 
 from fastapi import APIRouter, Request
-
-import os
 from pathlib import Path
+from sqlalchemy.ext.asyncio import AsyncSession
 
 current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
@@ -28,21 +27,25 @@ templates = Jinja2Templates(directory=str(templates_dir))
 router = APIRouter()
 
 
-
-
 invoice_dict_global = None
 
 
 @router.get("/")
-async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
-    latest_invoice = get_invoice()
+async def send_invoice_webpage(
+    request: Request, current_user: User = Depends(get_current_active_user)
+) -> _TemplateResponse:
+    latest_invoice = await get_latest_invoice()
     return templates.TemplateResponse(
-        request=request, name="invoice_form.jinja", context={"latest_invoice": latest_invoice, "invoice_fields": InvoiceFields}
+        request=request,
+        name="invoice_form.jinja",
+        context={"latest_invoice": latest_invoice, "invoice_fields": InvoiceFields},
     )
 
 
 @router.get("/invoice")
-async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
+async def send_invoice_webpage(
+    request: Request, current_user: User = Depends(get_current_active_user)
+) -> _TemplateResponse:
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
     invoice_pay_date = request.query_params.get("invoice_pay_date")
@@ -162,12 +165,14 @@ async def send_invoice_webpage(request: Request, current_user: User = Depends(ge
     return templates.TemplateResponse(
         request=request,
         name="invoice_page.jinja",
-        context={"invoice_dict": invoice_dict,"invoice_fields": InvoiceFields},
+        context={"invoice_dict": invoice_dict, "invoice_fields": InvoiceFields},
     )
 
 
 @router.get("/invoice-pdf")
-async def send_invoice_webpage(request: Request, current_user: User = Depends(get_current_active_user)) -> _TemplateResponse:
+async def send_invoice_webpage(
+    request: Request
+) -> _TemplateResponse:
     global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
@@ -254,22 +259,18 @@ async def send_invoice_webpage(request: Request, current_user: User = Depends(ge
             invoice_counter.get_brutto_value(),
             InvoiceFields.invoice_brutto_value.value,
         ),
-         "invoice_currency": (
-                "PLN",
-                InvoiceFields.invoice_currency.value,
-            ),
+        "invoice_currency": (
+            "PLN",
+            InvoiceFields.invoice_currency.value,
+        ),
         "invoice_value_in_words": (
             (
                 number_to_word(float(invoice_counter.get_brutto_value())),
                 InvoiceFields.invoice_value_in_words.value,
             )
         ),
-        "invoice_signature_left": (
-            invoice_signature_left
-        ),
-        "invoice_signature_right": (
-            invoice_signature_right
-        ),
+        "invoice_signature_left": (invoice_signature_left),
+        "invoice_signature_right": (invoice_signature_right),
     }
 
     return templates.TemplateResponse(
@@ -278,11 +279,14 @@ async def send_invoice_webpage(request: Request, current_user: User = Depends(ge
 
 
 @router.get("/file")
-def send_file(request: Request, current_user: User = Depends(get_current_active_user)) -> FileResponse:
+def send_file(
+    request: Request
+) -> FileResponse:
     invoice_file_path = "./output3.pdf"
     custom_filename = "output3.pdf"
 
     return FileResponse(invoice_file_path, status_code=200, filename=custom_filename)
+
 
 @router.post("/form", status_code=201)
 def get_form(
@@ -304,7 +308,9 @@ def get_form(
     invoice_hour_rates: Annotated[str, Form()],
     invoice_hours_number: Annotated[str, Form()],
     invoice_signature_left: Annotated[str, Form()],
-    invoice_signature_right: Annotated[str, Form()], current_user: User = Depends(get_current_active_user)
+    invoice_signature_right: Annotated[str, Form()],
+    current_user: User = Depends(get_current_active_user),
+    db: AsyncSession = Depends(get_db)  # Add db session
 ) -> RedirectResponse:
 
     invoice_dict = {
@@ -386,12 +392,13 @@ def get_form(
 
     try:
         pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
+        print("koko")
         pdf_creator.create_pdf()
     except Exception as e:
         print(f"Error creating PDF: {str(e)}")
         # Handle the error appropriately
 
-    insert_invoice(table_name="invoices", data=tuple(invoice_dict.values()))
+    # await create_invoice(invoice_data=invoice_dict)
 
     response = RedirectResponse(url=redirect_url, status_code=301)
 
