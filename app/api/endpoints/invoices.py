@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime
 from typing import Annotated
 
@@ -32,9 +33,9 @@ invoice_dict_global = None
 
 @router.get("/")
 async def send_invoice_webpage(
-    request: Request, current_user: User = Depends(get_current_active_user)
+    request: Request, current_user: User = Depends(get_current_active_user),db: AsyncSession = Depends(get_db)
 ) -> _TemplateResponse:
-    latest_invoice = await get_latest_invoice()
+    latest_invoice = await get_latest_invoice(db)
     return templates.TemplateResponse(
         request=request,
         name="invoice_form.jinja",
@@ -170,9 +171,7 @@ async def send_invoice_webpage(
 
 
 @router.get("/invoice-pdf")
-async def send_invoice_webpage(
-    request: Request
-) -> _TemplateResponse:
+async def send_invoice_webpage(request: Request) -> _TemplateResponse:
     global invoice_dict_global
     invoice_number = request.query_params.get("invoice_number")
     invoice_date = request.query_params.get("invoice_date")
@@ -279,9 +278,7 @@ async def send_invoice_webpage(
 
 
 @router.get("/file")
-def send_file(
-    request: Request
-) -> FileResponse:
+def send_file(request: Request) -> FileResponse:
     invoice_file_path = "./output3.pdf"
     custom_filename = "output3.pdf"
 
@@ -289,7 +286,7 @@ def send_file(
 
 
 @router.post("/form", status_code=201)
-def get_form(
+async def get_form(
     request: Request,
     invoice_number: Annotated[str, Form()],
     invoice_date: Annotated[str, Form()],
@@ -310,7 +307,7 @@ def get_form(
     invoice_signature_left: Annotated[str, Form()],
     invoice_signature_right: Annotated[str, Form()],
     current_user: User = Depends(get_current_active_user),
-    db: AsyncSession = Depends(get_db)  # Add db session
+    db: AsyncSession = Depends(get_db),  # Add db session
 ) -> RedirectResponse:
 
     invoice_dict = {
@@ -388,17 +385,16 @@ def get_form(
         }.items()
     )
 
-    print(f"Attempting to create PDF from URL: {url_pdf}")  # Debug print
-
     try:
         pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
         print("koko")
-        pdf_creator.create_pdf()
+        await asyncio.gather(
+            pdf_creator.create_pdf_async(),
+            create_invoice(invoice_data=invoice_dict, db=db),
+        )
     except Exception as e:
         print(f"Error creating PDF: {str(e)}")
         # Handle the error appropriately
-
-    # await create_invoice(invoice_data=invoice_dict)
 
     response = RedirectResponse(url=redirect_url, status_code=301)
 

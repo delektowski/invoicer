@@ -1,3 +1,5 @@
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
 import pdfkit
 
 
@@ -16,9 +18,16 @@ class PdfCreator:
     def __init__(self, website_url) -> None:
         self.website_url = website_url
 
-    def create_pdf(self):
-        print(f"Creating PDF from {self.website_url}")
-        pdfkit.from_url(self.website_url, self.output_pdf_path, options=self.options)
+    async def create_pdf_async(self):
+        loop = asyncio.get_event_loop()
+        with ThreadPoolExecutor() as pool:
+            await loop.run_in_executor(
+                pool, 
+                pdfkit.from_url,
+                self.website_url,
+                self.output_pdf_path,
+                self.options
+            )
 
 if __name__ == "__main__":
     pdf_creator = PdfCreator("http://0.0.0.0:8000/")
