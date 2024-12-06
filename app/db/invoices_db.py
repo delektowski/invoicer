@@ -55,15 +55,12 @@ async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession) -> Invo
 async def get_latest_invoice(db: AsyncSession) -> Optional[Invoice]:
     """Get the latest invoice using SQLAlchemy async ORM"""
     try:
-        print("KOZAAAA")
         # Create query to get latest invoice
         query = select(Invoice).order_by(Invoice.id.desc()).limit(1)
 
         # Execute query
         result = await db.execute(query)
-        print("result", result)
         invoice = result.scalar_one_or_none()
-        print("invoice LATEST", invoice)
 
         return invoice
 

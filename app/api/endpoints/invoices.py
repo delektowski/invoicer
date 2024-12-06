@@ -2,6 +2,7 @@ import asyncio
 from datetime import datetime
 from typing import Annotated
 
+from db.user_db import init_default_user
 from db.database import get_db
 from auth.dependencies import get_current_active_user, verify_token
 from auth.models import User
@@ -36,6 +37,7 @@ async def send_invoice_webpage(
     request: Request, current_user: User = Depends(get_current_active_user),db: AsyncSession = Depends(get_db)
 ) -> _TemplateResponse:
     latest_invoice = await get_latest_invoice(db)
+    await init_default_user(db)
     return templates.TemplateResponse(
         request=request,
         name="invoice_form.jinja",
@@ -387,7 +389,6 @@ async def get_form(
 
     try:
         pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
-        print("koko")
         await asyncio.gather(
             pdf_creator.create_pdf_async(),
             create_invoice(invoice_data=invoice_dict, db=db),

@@ -1,9 +1,11 @@
+from db.user_db import get_user_db
+from db.database import get_db
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jose import JWTError, jwt
 from core.config import settings
 from auth.models import TokenData, User, UserInDB
-from db.fake_db import fake_users_db
+from sqlalchemy.ext.asyncio import AsyncSession
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
@@ -13,8 +15,7 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
         raise HTTPException(status_code=401)
     return token
 
-async def get_current_user(token: str = Depends(oauth2_scheme)):
-    print("get_current_user")
+async def get_current_user(token: str = Depends(oauth2_scheme),db: AsyncSession = Depends(get_db)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -28,13 +29,12 @@ async def get_current_user(token: str = Depends(oauth2_scheme)):
         token_data = TokenData(username=username)
     except JWTError:
         raise credentials_exception
-    user = get_user(fake_users_db, username=token_data.username)
+    user = await get_user_db(db, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user
 
 async def get_current_active_user(current_user: User = Depends(get_current_user)):
-    print("get_current_active_user")
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
     return current_user

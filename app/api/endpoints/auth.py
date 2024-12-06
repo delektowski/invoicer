@@ -1,5 +1,7 @@
 from pathlib import Path
 from typing import Literal
+from db.database import get_db
+from db.user_db import get_user_db
 from fastapi import APIRouter, Depends, HTTPException, Request, status, Response
 from fastapi.security import OAuth2PasswordRequestForm
 from datetime import timedelta
@@ -8,9 +10,9 @@ from fastapi.templating import Jinja2Templates
 from auth.models import Token, User
 from auth.utils import create_access_token, verify_password
 from core.config import settings
-from db.fake_db import fake_users_db
 from auth.dependencies import get_user
 from fastapi.responses import RedirectResponse
+from sqlalchemy.ext.asyncio import AsyncSession
 
 current_dir = Path(__file__).resolve().parent
 project_root = current_dir.parent.parent
@@ -21,9 +23,8 @@ templates = Jinja2Templates(directory=str(templates_dir))
 router = APIRouter()
 
 
-def authenticate_user(fake_db, username: str, password: str) -> User | Literal[False]:
-    user = get_user(fake_db, username)
-    print("user", user)
+async def authenticate_user(db, username: str, password: str) -> User | Literal[False]:
+    user = await get_user_db(db, username)
     if not user:
         return False
     if not verify_password(password, user.hashed_password):
@@ -36,8 +37,9 @@ async def login_for_access_token(
     request: Request,
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
+    db: AsyncSession = Depends(get_db)
 ):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
+    user = await authenticate_user(db, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

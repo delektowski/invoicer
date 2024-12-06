@@ -1,11 +1,7 @@
 from datetime import datetime
+from models.user import User
 from db.database import Base
-from sqlalchemy.orm import mapped_column, Mapped
-from sqlalchemy import (
-    Integer,
-    Date,
-    Text,
-)
+from models.base import *
 
 class Invoice(Base):
     __tablename__ = "invoices"
@@ -29,3 +25,5 @@ class Invoice(Base):
     invoice_hours_number: Mapped[int] = mapped_column(Integer)
     invoice_signature_left: Mapped[str] = mapped_column(Text)
     invoice_signature_right: Mapped[str] = mapped_column(Text)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
+    user: Mapped["User"] = relationship("User", back_populates="invoices")
