@@ -3,7 +3,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import Dict, Any, Optional
 from db.database import get_db
-from models.invoice import Invoice
+from models.invoice import InvoiceDb
 from datetime import datetime
 
 
@@ -12,7 +12,7 @@ def convert_date_string(date_str: str) -> datetime.date:
     return datetime.strptime(date_str, "%Y-%m-%d").date()
 
 
-async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession) -> Invoice:
+async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession, user_id: str) -> InvoiceDb:
     """Create a new invoice using SQLAlchemy async ORM"""
     try:
 
@@ -22,7 +22,8 @@ async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession) -> Invo
             invoice_data["invoice_pay_date"]
         )
         # Create new Invoice instance
-        invoice = Invoice(
+        invoice = InvoiceDb(
+            user_id=user_id,  # Add this line
             invoice_number=invoice_data["invoice_number"],
             invoice_date=invoice_data["invoice_date"],
             invoice_pay_date=invoice_data["invoice_pay_date"],
@@ -42,7 +43,7 @@ async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession) -> Invo
             invoice_signature_left=invoice_data["invoice_signature_left"],
             invoice_signature_right=invoice_data["invoice_signature_right"],
         )
-
+        print("invoice", invoice)
         db.add(invoice)
         await db.commit()
         return invoice
@@ -52,11 +53,11 @@ async def create_invoice(invoice_data: Dict[str, Any], db: AsyncSession) -> Invo
         raise ValueError(f"Failed to create invoice: {str(e)}")
 
 
-async def get_latest_invoice(db: AsyncSession) -> Optional[Invoice]:
+async def get_latest_invoice(db: AsyncSession, user_id:str) -> Optional[InvoiceDb]:
     """Get the latest invoice using SQLAlchemy async ORM"""
     try:
         # Create query to get latest invoice
-        query = select(Invoice).order_by(Invoice.id.desc()).limit(1)
+        query = select(InvoiceDb).where(InvoiceDb.user_id == user_id).order_by(InvoiceDb.id.desc()).limit(1)
 
         # Execute query
         result = await db.execute(query)

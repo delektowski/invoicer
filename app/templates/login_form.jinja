@@ -1,12 +1,17 @@
-<form id="loginForm" method="POST" action="/token">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+ <div class="container">
+        <form id="loginForm" method="POST" action="/token">
+            <div class="fields-container--vertical">
+                <label for="username" class="field--gray">Username:</label>
+                <input type="text" id="username" name="username" required class="field">
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <button type="submit">Login</button>
-</form>
+                <label for="password" class="field--gray">Password:</label>
+                <input type="password" id="password" name="password" required class="field">
+            </div>
+            <div class="button-container">
+                <button type="submit" class="button--create-pdf">Login</button>
+            </div>
+        </form>
+    </div>
 
 <script>
     document.getElementById('loginForm').onsubmit = async function (event) {

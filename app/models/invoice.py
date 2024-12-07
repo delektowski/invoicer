@@ -1,9 +1,9 @@
 from datetime import datetime
-from models.user import User
+from models.user import UserDb
 from db.database import Base
 from models.base import *
 
-class Invoice(Base):
+class InvoiceDb(Base):
     __tablename__ = "invoices"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -26,4 +26,4 @@ class Invoice(Base):
     invoice_signature_left: Mapped[str] = mapped_column(Text)
     invoice_signature_right: Mapped[str] = mapped_column(Text)
     user_id: Mapped[int] = mapped_column(ForeignKey("users.id"), nullable=False)
-    user: Mapped["User"] = relationship("User", back_populates="invoices")
+    user: Mapped["UserDb"] = relationship("UserDb", back_populates="invoices")

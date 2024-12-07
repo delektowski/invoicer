@@ -1,17 +1,14 @@
 import asyncio
-from datetime import datetime
 from typing import Annotated
-
-from db.user_db import init_default_user
 from db.database import get_db
-from auth.dependencies import get_current_active_user, verify_token
+from auth.dependencies import get_current_active_user
 from auth.models import User
 from fastapi import Form, Request, APIRouter, Depends
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import FileResponse, RedirectResponse
 from starlette.templating import _TemplateResponse
 from models.invoice_fields import InvoiceFields
-from services.number_to_word import number_to_word  # Correct import
+from services.number_to_word import number_to_word 
 from services.invoice_calculator import InvoiceCounter
 from services.pdf_creator import PdfCreator
 from db.invoices_db import create_invoice, get_latest_invoice
@@ -36,8 +33,8 @@ invoice_dict_global = None
 async def send_invoice_webpage(
     request: Request, current_user: User = Depends(get_current_active_user),db: AsyncSession = Depends(get_db)
 ) -> _TemplateResponse:
-    latest_invoice = await get_latest_invoice(db)
-    await init_default_user(db)
+    user_id = current_user.id
+    latest_invoice = await get_latest_invoice(db,user_id)
     return templates.TemplateResponse(
         request=request,
         name="invoice_form.jinja",
@@ -387,11 +384,13 @@ async def get_form(
         }.items()
     )
 
+    user_id = current_user.id
+
     try:
         pdf_creator = PdfCreator(str(request.base_url) + url_pdf)
         await asyncio.gather(
             pdf_creator.create_pdf_async(),
-            create_invoice(invoice_data=invoice_dict, db=db),
+            create_invoice(invoice_data=invoice_dict, db=db, user_id=user_id),
         )
     except Exception as e:
         print(f"Error creating PDF: {str(e)}")

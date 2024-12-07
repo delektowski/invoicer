@@ -22,7 +22,7 @@ AsyncSessionLocal = sessionmaker(
 
 async def init_db():
     logger.info("Initializing database...")
-    from models.invoice import Invoice  # Import here to avoid circular imports
+    from models.invoice import InvoiceDb  # Import here to avoid circular imports
     async with async_engine.begin() as conn:
         logger.info("Creating tables...")
         await conn.run_sync(Base.metadata.create_all)
