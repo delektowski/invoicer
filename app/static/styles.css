@@ -329,6 +329,9 @@ textarea {
     text-decoration: none;
     cursor: pointer;
     background: #fff;
-
     margin-top: 24px;
+}
+
+.button--create-pdf:hover {
+    background-color: #f4f4f4;
 }

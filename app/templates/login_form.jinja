@@ -1,42 +1,53 @@
- <div class="container">
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', path='/forms.css') }}" rel="stylesheet">
+    <title>Invoicer</title>
+</head>
+
+<body>
+  <div class="container">
         <form id="loginForm" method="POST" action="/token">
             <div class="fields-container--vertical">
-                <label for="username" class="field--gray">Username:</label>
+                <label for="username" class="field--gray">Użytkownik:</label>
                 <input type="text" id="username" name="username" required class="field">
 
-                <label for="password" class="field--gray">Password:</label>
+                <label for="password" class="field--gray">Hasło:</label>
                 <input type="password" id="password" name="password" required class="field">
             </div>
             <div class="button-container">
-                <button type="submit" class="button--create-pdf">Login</button>
+                <button type="submit" class="button--create-pdf">Zaloguj</button>
             </div>
         </form>
     </div>
 
-<script>
-    document.getElementById('loginForm').onsubmit = async function (event) {
-        event.preventDefault(); 
-        const formData = new FormData(this);
+    <script>
+        document.getElementById('loginForm').onsubmit = async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
 
-        const response = await fetch(this.action, {
-            method: 'POST',
-            body: formData,
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
 
-        });
+            });
 
-        const data = await response.json(); // Assuming the response contains the token
-        console.log("data", data)
-        const token = data.access_token;
-        window.location.href = '/';
-        sessionStorage.setItem('token', token);
-        
-
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
+            const data = await response.json(); 
+            const token = data.access_token;
+            window.location.href = '/';
+            sessionStorage.setItem('token', token);
 
 
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
 
-    };
 
-</script>
+
+        };
+
+    </script>
+</body>
