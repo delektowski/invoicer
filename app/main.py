@@ -1,7 +1,7 @@
 import logging
 from urllib.request import Request
 from db.database import init_db
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from api.endpoints import invoices, auth
 import os
@@ -28,6 +28,7 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 static_dir = os.path.join(current_dir, "static")
 
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
+
 
 
 @app.middleware("http")
@@ -66,6 +67,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.exception_handler(HTTPException)
+async def custom_http_exception_handler(request: Request, exc: HTTPException):
+    if exc.status_code == 401 and "Could not validate credentials" in exc.detail:
+        return RedirectResponse(url="/login")
+    return await app.default_exception_handler(request, exc)
 
 app.include_router(auth.router)
 app.include_router(invoices.router)
