@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-<html lang="pl">
+{% include "base.jinja" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static', path='/forms.css') }}" rel="stylesheet">
-    <title>Invoicer</title>
-</head>
-
-<body>
-  <div class="container">
+{% block content %}
+<div class="container__auth--background">
+    <div class="container__auth">
         <form id="loginForm" method="POST" action="/register">
-            <div class="fields-container--vertical">
-                <label for="username" class="field--gray">Użytkownik:</label>
-                <input type="text" id="username" name="username" required class="field">
+            <div class="fields__auth-container--vertical">
+                <label for="username" class="field__auth--gray">Użytkownik:</label>
+                <input type="text" id="username" name="username" required class="field__auth">
 
-                <label for="password" class="field--gray">Hasło:</label>
-                <input type="password" id="password" name="password" required class="field">
+                <label for="password" class="field__auth--gray">Hasło:</label>
+                <input type="password" id="password" name="password" required class="field__auth">
             </div>
             <div class="button-container">
                 <button type="submit" class="button--create-pdf">Utwórz użytkownika</button>
             </div>
         </form>
     </div>
-</body>
+</div>
+
+{% endblock %}
