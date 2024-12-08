@@ -1,19 +1,10 @@
-<!DOCTYPE html>
-<html lang="pl">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-    <title>Invoicer</title>
-</head>
+{% include "base.jinja" %}
 
-<body>
- 
+{% block content %}
     <div class="container">
         <form action="/form/" method="post">
             <div class="invoice-confirmation ">
-            
             <div class="container--button--create-pdf">
                 <button type="submit" class="button--create-pdf">Stwórz PDF</button>
             </div>
@@ -27,7 +18,6 @@
                         value="{{latest_invoice["invoice_number"]}}">
                 </div>
             </div>
-
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
                     <h2>{{invoice_fields.invoice_date.value}}</h2>
@@ -37,7 +27,6 @@
                         value="{{latest_invoice["invoice_date"]}}">
                 </div>
             </div>
-
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray">
                     <h2>{{invoice_fields.invoice_pay_date.value}}</h2>
@@ -212,6 +201,4 @@
             
         </form>
     </div>
-</body>
-
-</html>
+{% endblock %}

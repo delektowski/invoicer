@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="pl">
+{% include "base.jinja" %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-    <title>Invoicer</title>
-</head>
-
-<body>
+{% block content %}
     <div class="invoice-confirmation">
         <h3>Faktura została utworzona.</h3>
         <form action="/file" method="get">
@@ -167,6 +159,4 @@
             <button class="button--create-pdf" type="submit">Pobierz PDF</button>
         </form>
     </div>
-</body>
-
-</html>
+{% endblock %}

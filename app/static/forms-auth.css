@@ -5,16 +5,18 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+
+.container__auth--background {
+   
+    background: #f0f0f0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container {
+.container__auth {
+    font-family: Arial, sans-serif;
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -28,18 +30,18 @@ body {
     flex-direction: column;
 }
 
-.fields-container--vertical {
+.fields__auth-container--vertical {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.field--gray {
+.field__auth--gray {
     font-size: 14px;
     color: #555;
 }
 
-.field {
+.field__auth {
     width: 100%;
     padding: 10px;
     font-size: 14px;
