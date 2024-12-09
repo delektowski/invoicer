@@ -8,14 +8,13 @@
     justify-content: space-between;
     align-items: center;
     width: 785px;
+    padding-inline: 50px;
+    background-color: #fff;
 }
 
 .menu {
     display: flex;
     gap: 10px;
-}
-
-.menu {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -24,4 +23,5 @@
 .container__header a {
     text-decoration: none;
     color: inherit;
+    font-weight: 100;
 }

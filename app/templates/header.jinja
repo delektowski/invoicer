@@ -1,6 +1,19 @@
 {% block content %}
 <header class="container__header">
     <h1 class="logo"><a href="/">Invoicer</a></h1>
+        {% if page_context == "invoice_form" %}
+        <button type="button" 
+                class="button--create-pdf" 
+                onclick="document.getElementById('pdf-creation-form').submit()">
+            Stwórz PDF
+        </button>
+    {% endif %}
+    
+    {% if page_context == "get_pdf_file" %}
+    <form action="/file" method="get">
+        <button class="button--create-pdf" type="submit">Pobierz PDF</button>
+    </form>
+    {% endif %}
     <nav>
         <ul class="menu">
             <li><a href="/login">Loguj</a></li>

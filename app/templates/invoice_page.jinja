@@ -1,14 +1,10 @@
+{% set page_context= "get_pdf_file" %}
 {% include "base.jinja" %}
 
 {% block content %}
-    <div class="invoice-confirmation">
-        <h3>Faktura została utworzona.</h3>
-        <form action="/file" method="get">
-            <button class="button--create-pdf" type="submit">Pobierz PDF</button>
-        </form>
-    </div>
 
-    <div class="container">
+
+    <div class="container container--top-big-margin">
         <form action="/form/" method="post">
             {% for section, val in invoice_dict.items() %}
 
@@ -89,8 +85,6 @@
                     <div class="field--gray--columns field--column__{{value[2]}} field--border-left-none">
                         <h2>{{value[1]}}</h2>
                     </div>
-
-
                     <div class="field--column field--column__{{value[2]}} field--border-bottom">
                         <p>{{value[0]}}</p>
                     </div>
@@ -154,9 +148,4 @@
         </form>
     </div>
 
-    <div class="invoice-confirmation">
-        <form action="/file" method="get">
-            <button class="button--create-pdf" type="submit">Pobierz PDF</button>
-        </form>
-    </div>
 {% endblock %}

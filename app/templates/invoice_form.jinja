@@ -1,14 +1,9 @@
-
+{% set page_context= "invoice_form" %}
 {% include "base.jinja" %}
 
 {% block content %}
-    <div class="container">
-        <form action="/form/" method="post">
-            <div class="invoice-confirmation ">
-            <div class="container--button--create-pdf">
-                <button type="submit" class="button--create-pdf">Stwórz PDF</button>
-            </div>
-            </div>
+    <div class="container container--top-big-margin">
+        <form id="pdf-creation-form" action="/form/" method="post">
             <div class="fields-container--horizonal fields-container--padding-left">
                 <div class="field--gray field--large">
                     <h2 class="field-invoice--bold">{{invoice_fields.invoice_number.value}}</h2>
@@ -193,10 +188,6 @@
                     <p>upoważnionej do odbioru faktury</p>
                 </div>
 
-            </div>
-
-         <div class="container--button--create-pdf ">
-                <button type="submit" class="button--create-pdf">Stwórz PDF</button>
             </div>
             
         </form>

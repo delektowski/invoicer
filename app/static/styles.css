@@ -1,17 +1,12 @@
-/* General reset */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body,
 input,
 textarea,
 p,
 h2 {
+    box-sizing: border-box;
     font-family: Helvetica, Arial, sans-serif, monospace;
     font-weight: 300;
+    margin: 0;
     font-size: 14px;
 }
 
@@ -19,8 +14,12 @@ h2 {
     max-width: 785px;
     padding-block: 50px;
     padding-inline: 50px;
-    margin: 3vh auto;
+    margin: 20px auto;
     background-color: whitesmoke;
+}
+
+.container--top-big-margin {
+    margin: 100px auto;
 }
 
 .container--bg-white {
