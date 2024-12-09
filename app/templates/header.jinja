@@ -3,7 +3,7 @@
     <h1 class="logo"><a href="/">Invoicer</a></h1>
         {% if page_context == "invoice_form" %}
         <button type="button" 
-                class="button--create-pdf" 
+                class="button__header" 
                 onclick="document.getElementById('pdf-creation-form').submit()">
             Stwórz PDF
         </button>
@@ -11,7 +11,7 @@
     
     {% if page_context == "get_pdf_file" %}
     <form action="/file" method="get">
-        <button class="button--create-pdf" type="submit">Pobierz PDF</button>
+        <button class="button__header" type="submit">Pobierz PDF</button>
     </form>
     {% endif %}
     <nav>

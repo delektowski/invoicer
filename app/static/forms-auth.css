@@ -45,7 +45,7 @@
     text-align: center;
 }
 
-button {
+.button_forms {
     overflow: hidden;
     border: 1px solid #18181a;
     color: #18181a;
@@ -59,6 +59,6 @@ button {
     margin-top: 24px;
 }
 
-button:hover {
+.button_forms:hover {
     background-color: #f4f4f4;
 }

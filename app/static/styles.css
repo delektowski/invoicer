@@ -322,7 +322,7 @@ textarea {
     margin-bottom:0;
 }
 
-.button--create-pdf {
+.button__header {
     overflow: hidden;
     border: 1px solid #18181a;
     color: #18181a;
@@ -333,9 +333,8 @@ textarea {
     text-decoration: none;
     cursor: pointer;
     background: #fff;
-    margin-top: 24px;
 }
 
-.button--create-pdf:hover {
+.button__header:hover {
     background-color: #f4f4f4;
 }
