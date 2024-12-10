@@ -17,15 +17,11 @@
     font-weight: 100;
 }
 
-
-
-
 .svg-icon {
     width: 40px;
     height: 25px;
     cursor: pointer;
 }
-
 
 #arrow-form {
     display: none;
@@ -66,4 +62,3 @@
     padding: 0;
     margin: 0;
 }
-

@@ -6,6 +6,13 @@
     align-items: center;
 }
 
+.container-title {
+    font-size: 24px;
+    font-weight: 100;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
 .container__auth {
     font-family: Arial, sans-serif;
     width: 100%;

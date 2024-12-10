@@ -1,8 +1,10 @@
+{% set page_context= "register_page" %}
 {% include "base.jinja" %}
 
 {% block content %}
 <div class="container__auth--background">
     <div class="container__auth">
+    <h2 class="container-title">Rejestracja</h2>
         <form id="loginForm" method="POST" action="/register">
             <div class="fields__auth-container--vertical">
                 <label for="username" class="field__auth--gray">Użytkownik:</label>
