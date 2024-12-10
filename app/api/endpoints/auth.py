@@ -68,6 +68,21 @@ async def get_login_form(request: Request):
     return templates.TemplateResponse("login_form.jinja", {"request": request})
 
 
+@router.get("/logout")
+async def logout(response: Response):
+    response.delete_cookie(
+        key="Authorization",
+        path="/",
+        secure=True,
+        httponly=True,
+        samesite="strict"
+    )
+    return RedirectResponse(
+        url="/login",
+        status_code=303 
+    )
+
+
 @router.get("/register")
 async def register_user(request: Request):
     return templates.TemplateResponse("registration_form.jinja", {"request": request})

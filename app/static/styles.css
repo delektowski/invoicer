@@ -14,12 +14,12 @@ h2 {
     max-width: 785px;
     padding-block: 50px;
     padding-inline: 50px;
-    margin: 20px auto;
+    margin: 36px auto;
     background-color: whitesmoke;
 }
 
 .container--top-big-margin {
-    margin: 100px auto;
+    margin: 60px auto;
 }
 
 .container--bg-white {
@@ -294,47 +294,4 @@ textarea {
     left: 32px;
 }
 
-.invoice-confirmation {
-    padding: 10px 100px;
-    margin: 3vh auto;
-    background-color: whitesmoke;
-    display: grid;
-    grid-template-rows: 20px 1fr;
-    align-items: center;
-    justify-items: center;
-}
 
-.button-container {
-    display: -webkit-box;
-    display: flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-}
-
-.container--button--create-pdf {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 100px;
-}
-
-.container--button--create-pdf-bottom {
-    margin-bottom:0;
-}
-
-.button__header {
-    overflow: hidden;
-    border: 1px solid #18181a;
-    color: #18181a;
-    display: inline-block;
-    font-size: 15px;
-    line-height: 15px;
-    padding: 18px 18px 17px;
-    text-decoration: none;
-    cursor: pointer;
-    background: #fff;
-}
-
-.button__header:hover {
-    background-color: #f4f4f4;
-}
